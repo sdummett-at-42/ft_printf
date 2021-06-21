@@ -6,13 +6,19 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/20 18:02:30 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:57:20 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 
-//#include "libft.h"
+/////////// TEMP /////////// 
+
+#include <stdio.h>
+
+//////////////////////////// 
+
+#include "libft/libft.h"
 
 #endif
