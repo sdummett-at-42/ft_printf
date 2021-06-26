@@ -6,11 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 05:12:17 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 05:29:58 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 07:58:37 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 void	ft_putaddr(long int addr)
 {

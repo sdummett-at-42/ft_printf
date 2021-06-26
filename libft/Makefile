@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/09 14:41:18 by sdummett          #+#    #+#              #
-#    Updated: 2021/03/25 18:24:27 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/26 09:08:04 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@
 #                                      #
 # ************************************ #
 
-CC = 		gcc 
-AR = 		ar
-ARFLAGS = 	rcs
-CFLAGS = 	-Wall -Wextra -Werror -c
-NAME = 		libft.a
-SRC =		ft_strlen.c \
+CC			= clang 
+AR			= ar
+ARFLAGS		= rcs
+CFLAGS		= -Wall -Wextra -Werror -c
+NAME		= libft.a
+SRC			= ft_strlen.c \
 			ft_atoi.c \
 			ft_isalpha.c \
 			ft_tolower.c \
@@ -57,7 +57,7 @@ SRC =		ft_strlen.c \
 			ft_putnbr_fd.c \
 			ft_isupper_bonus.c \
 			ft_islower_bonus.c 
-SRCBONUS =	ft_lstnew.c \
+SRCBONUS	=	ft_lstnew.c \
 			ft_lstadd_front.c \
 			ft_lstsize.c \
 			ft_lstlast.c \
@@ -67,8 +67,8 @@ SRCBONUS =	ft_lstnew.c \
 			ft_lstiter.c \
 			ft_lstmap.c
 
-OBJ = $(SRC:.c=.o)
-OBJBONUS = $(SRCBONUS:.c=.o)
+OBJ			= $(SRC:.c=.o)
+OBJBONUS	= $(SRCBONUS:.c=.o)
 
 # ************************************ #
 #                                      #
@@ -88,11 +88,9 @@ bonus: $(OBJBONUS)
 	$(CC) $(CFLAGS) -o $@ $<
 so:
 	$(CC) -fPIC $(CFLAGS) $(SRC)
-	$(CC) -shared -o libft.so $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(OBJBONUS)
-	rm -f libft.so
 
 fclean: clean
 	rm -f $(NAME)
