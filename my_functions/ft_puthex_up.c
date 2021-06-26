@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 05:05:58 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 05:09:40 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 05:28:57 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	len_str(long int nb)
 {
 	int	len;
 
+	if (nb == 0)
+		return (1);
 	len = 0;
 	while (nb)
 	{
@@ -46,6 +48,8 @@ void	ft_puthex_up(long int nb)
 		nb = conv_nb(nb);
 	len = len_str(nb);
 	str = (char *)malloc(sizeof(char) * len + 1);
+	if (nb == 0)
+		str[0] = '0';
 	str[len] = 0;
 	while (nb)
 	{
