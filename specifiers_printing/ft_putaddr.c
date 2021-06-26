@@ -6,14 +6,14 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 05:12:17 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 07:58:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 10:16:24 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_putaddr(long int addr)
+void	ft_putaddr(void *addr)
 {
 	ft_putstr("0x");
-	ft_puthex_low(addr);
+	ft_puthex_low((long int)addr);
 }
