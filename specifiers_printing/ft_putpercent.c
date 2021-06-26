@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putaddr.c                                       :+:      :+:    :+:   */
+/*   ft_putpercent.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 05:12:17 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 10:33:44 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
+/*   Updated: 2021/06/26 12:12:02 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-void	ft_putaddr(void *addr)
+void	ft_putpercent(void)
 {
-	ft_putstr("0x");
-	ft_puthex_low((long int)addr);
+	write(1, "%", 1);
 }
