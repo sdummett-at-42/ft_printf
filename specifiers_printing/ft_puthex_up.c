@@ -6,11 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 05:05:58 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 05:28:57 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 07:58:57 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 static int	len_str(long int nb)
 {
