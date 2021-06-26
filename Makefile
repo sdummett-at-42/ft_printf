@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/26 09:31:00 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/26 19:00:27 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRC		= specifiers_printing/ft_putaddr.c \
 		  specifiers_printing/ft_puthex_low.c \
 		  specifiers_printing/ft_puthex_up.c \
 		  specifiers_printing/ft_putnbr.c \
-		  specifiers_printing/ft_putstr.c
+		  specifiers_printing/ft_putstr.c \
+		  specifiers_printing/ft_putpercent.c \
+		  ft_printf.c
 
 OBJ = $(SRC:.c=.o)
 

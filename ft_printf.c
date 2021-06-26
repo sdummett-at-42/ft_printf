@@ -5,46 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/20 17:21:45 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/21 20:24:38 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
+/*   Updated: 2021/06/26 19:04:47 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <stdarg.h>
 
-int	ft_printf(int nb_arg, const char *format, ...)
+void	check_format(char **format, va_list var) //envoyer la va_list
 {
-	va_list list;
-	va_start(list, format);
-	
-	//int k = va_arg(list, int);
-	//printf(" %d\n", k);
-	//printf("%d\n", va_arg(list, int));
-	//printf("%d\n", va_arg(list, int));
-	while (nb_arg != 0)
+//	int i;
+
+//	i = 0;
+	while (**format != '\0')
 	{
-		printf("%d\n", va_arg(list, int));
-		nb_arg--;
+		if (**format == '%')
+		{
+			ft_putpercent();
+			return ;
+		}
+		else if (**format == 'c')
+		{
+			ft_putchar(va_arg(var, int));
+			return ;
+		}
+		else if (**format == 's')
+		{
+			ft_putstr(va_arg(var, char *));
+			return ;
+		}
+		else if (**format == 'p')
+		{
+			ft_putaddr(va_arg(var, void *));
+			return ;
+		}
+		else if (**format == 'd' || **format == 'i')
+		{
+			ft_putnbr(va_arg(var, int));
+			return ;
+		}
+		else if (**format == 'u')
+		{
+			ft_putnbr(va_arg(var, unsigned int));
+			return ;
+		}
+		else if (**format == 'x')
+		{
+			ft_puthex_low(va_arg(var, long int));
+			return ;
+		}
+		else if (**format == 'X')
+		{
+			ft_puthex_up(va_arg(var, long int));
+			return ;
+		}
+		(*format)++;
 	}
-	//printf("%d\n", 22);
-	va_end(list);	
-	return 0;
 }
 
-int main()
+int ft_printf(const char *format, ...)
 {
-
-	//ft_printf(42, "", 42, 41,40,39,38);
-	printf(">> %%0100d     : ||%0100d||\n", 42);
-	printf(">> %%0*d       : ||%0*d||\n", 100, 42);
-	printf(">> %%100d      : ||%100d||\n", 42);
-	printf(">> %%*d        : ||%*d||\n", 100, 42);
-	printf(">> %%-100d     : ||%-100d||\n", 42);
-	printf(">> %%-*d       : ||%-*d||\n", 100, 42);
-	printf(">> %%.100d     : ||%100.d||\n", 42);
-	printf(">> %%x         : ||%x||\n", 16);
+//	int	i;
+	va_list	vars;
+	va_start(vars, format);
 	
-	return (0);
+//	i = 0;
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			check_format((char **)&format, vars);
+		}
+		ft_putchar(*format);
+		format++;
+	}
+	va_end(vars);
+	return (42);
 }
+

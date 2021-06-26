@@ -6,11 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 12:12:02 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 19:00:47 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 void	ft_putpercent(void)
 {
