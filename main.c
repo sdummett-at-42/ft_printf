@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 10:00:40 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 19:01:19 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/26 19:33:31 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,20 @@
 
 int	main()
 {
-	//char c = 'S';
+	char c 		= 'O';
+	char str[]	= "YIIIKES";
+	int	nb		= 2194812;
+	unsigned int unb= -42;
+	//long int hex = 42;
 
-	ft_printf("Hello Wor%%ld!");
+
+	printf("[ FT_PRINTF ]\n\n");
+	ft_printf("Ceci est le %%c : ||%c||\nCeci est le %%s : ||%s||\nCeci est le %%p : ||%p||\nCeci est le %%d : ||%d||\nCeci est le %%i : ||%i||\nCeci est le %%u : ||%u||\nCeci est le %%x : ||%x||\nCeci est le %%X : ||%X||\n", c, str, &c,  nb, nb, unb, nb, nb);
+
+
+	printf("\n[  PRINTF  ]\n\n");
+	printf("Ceci est le %%c : ||%c||\nCeci est le %%s : ||%s||\nCeci est le %%p : ||%p||\nCeci est le %%d : ||%d||\nCeci est le %%i : ||%i||\nCeci est le %%u : ||%u||\nCeci est le %%x : ||%x||\nCeci est le %%X : ||%X||\n", c, str, &c,  nb, nb, unb, nb, nb);
+		//	ft_printf("Hello %% World! %c", c);
 	return 0;
 }
 
