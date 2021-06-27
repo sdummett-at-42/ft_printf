@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/27 19:48:52 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/28 00:55:37 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		= specifiers_printing/pointer_handler.c \
 		  specifiers_printing/string_handler.c \
 		  specifiers_printing/ft_putpercent.c \
 		  check_specifier.c \
+		  specifier_handler.c \
 		  utils.c \
 		  ft_printf.c
 
