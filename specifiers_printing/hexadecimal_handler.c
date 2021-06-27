@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 05:30:01 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/27 19:46:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,28 @@ void	ft_puthex_low(long int nb)
 	}
 	ft_putstr(str);
 	free(str);
-}	
+}
+
+void	ft_puthex_up(long int nb)
+{
+	char	*str;
+	char	*hexbase;
+	int		len;
+
+	hexbase = "0123456789ABCDEF";
+	if (nb < 0)
+		nb = conv_nb(nb);
+	len = len_str(nb);
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (nb == 0)
+		str[0] = '0';
+	str[len] = 0;
+	while (nb)
+	{
+		str[len - 1] = *(hexbase + nb % 16);
+		nb = nb / 16;
+		len--;
+	}
+	ft_putstr(str);
+	free(str);
+}

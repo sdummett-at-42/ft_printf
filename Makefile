@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/27 18:31:20 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/27 19:48:52 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,11 @@ AR		= ar
 ARFLAGS = rcs
 CFLAGS	= -Wall -Werror -Wextra -c
 NAME	= ft_printf.a
-SRC		= specifiers_printing/ft_putaddr.c \
-		  specifiers_printing/ft_putchar.c \
-		  specifiers_printing/ft_puthex_low.c \
-		  specifiers_printing/ft_puthex_up.c \
-		  specifiers_printing/ft_putnbr.c \
-		  specifiers_printing/ft_putstr.c \
+SRC		= specifiers_printing/pointer_handler.c \
+		  specifiers_printing/char_handler.c \
+		  specifiers_printing/hexadecimal_handler.c \
+		  specifiers_printing/numbers_handler.c \
+		  specifiers_printing/string_handler.c \
 		  specifiers_printing/ft_putpercent.c \
 		  check_specifier.c \
 		  utils.c \
