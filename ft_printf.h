@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 18:59:15 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/27 02:50:21 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_putnbr(long long int nb);
 void	ft_puthex_low(long int nb);
 void	ft_puthex_up(long int nb);
 void	ft_putpercent(void);
+int		check_specifier(char **format, va_list var);
 
 //////////////////////////// 
 
