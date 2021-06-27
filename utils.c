@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 18:04:56 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/27 18:28:45 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/27 19:02:55 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	search_specifier(char **format)
 			break ;
 	}
 	if (ret != 0)
-		(*format)++;
+		*format = &(*format)[i + 1];
 	return (ret);
 }
 
@@ -64,7 +64,7 @@ int	search_specifier(char **format)
 int main()
 {
 	int i;
-	char *format = "%c %s %p %d %i %u %x %X %%";
+	char *format = "%vfc    %vvs %    p % f f  d %    i % u %nnx %       l  X %l%";
 
 	i = 0;
 	while (*format != '\0')
