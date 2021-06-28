@@ -6,24 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 00:54:55 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 02:51:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	check_format(char **format, va_list var) //envoyer la va_list
-{
-	int ret;
-
-//	i = 0;
-	while (**format != '\0')
-	{
-		ret = check_specifier(format, var);
-		if (ret == 42)
-			return ;
-	}
-}
 
 int ft_printf(const char *format, ...)
 {
