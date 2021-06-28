@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 04:47:39 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 05:32:25 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ int	search_specifier(char **format)
 		if (ret != 0)
 			break ;
 	}
-//	if (ret != 0)
-//	{
-//		printf("Je rentre dedans\n");
-//		*format = &(*format)[i + 1];
-//	}
 	return (ret);
 }
 
