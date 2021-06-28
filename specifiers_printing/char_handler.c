@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 07:35:27 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 08:33:27 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
  void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+static void	shift_format(char **format)
+{
+	if (**format == '*')
+		(*format)++;
+	else if (**format >= '0' && **format <= '9')
+	{
+		while (**format >= '0' && **format <= '9')
+			(*format)++;
+	}
 }
 
 static char	*zero_flag(char **format, va_list var)
@@ -53,21 +64,49 @@ static char	*zero_flag(char **format, va_list var)
 	return (str);
 }
 
-static void	shift_format(char **format)
+static char	*width_flag(char **format, va_list var, int *side)
 {
-	if (**format == '*')
-		(*format)++;
-	else if (**format >= '0' && **format <= '9')
+	int nb;
+	char *str;
+
+	*side = 0;
+	nb = 0;
+	//(*format)++;
+	if (**format == '-')
 	{
-		while (**format >= '0' && **format <= '9')
-			(*format)++;
+		*side = 1;
+		(*format)++;
 	}
+	if (**format <= '9' && **format >= '0')
+	{
+		nb = nb + ft_atoi(*format) - 1;
+		(*format)++;
+	}
+	else if (**format == '*')
+	{
+		nb = va_arg(var, int) - 1;
+		(*format)++;
+	}
+	if (nb < 1)
+	{
+		printf(" < 1\n");
+		*side = -1;
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * nb + 1);
+	str[nb] = '\0';
+	while (nb != 0)
+	{
+		nb--;
+		str[nb] = ' ';
+	}
+	return (str);
 }
 
 void	char_handler(char **format, va_list var)
 {
 	char *str;
-	
+	int	side;	
 	//(*format)++;
 	while (**format != 'c')
 	{
@@ -82,6 +121,25 @@ void	char_handler(char **format, va_list var)
 				(*format)++;
 			(*format)++;
 			return ;
+		}
+		else if ((**format >= '1' && **format <= '9') || **format == '-' || **format == '*')
+		{
+			str = width_flag(format, var, &side);
+			shift_format(format);
+			if (str == NULL)
+				side = -1;
+			if (side == 0)
+			{
+				ft_putstr(str);
+			}
+			ft_putchar(va_arg(var, int));
+			if (side == 1)
+				ft_putstr(str);
+			while (**format != 'c')
+				(*format)++;
+			(*format)++;
+			return ;
+
 		}
 	}
 }
