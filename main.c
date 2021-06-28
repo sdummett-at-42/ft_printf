@@ -6,12 +6,19 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 10:00:40 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 19:33:31 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 05:01:50 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int main()
+{
+	ft_printf("%042c", 'S');
+	printf("\n%042c", 'S');
+}
+
+/*
 int	main()
 {
 	char c 		= 'O';
@@ -30,6 +37,8 @@ int	main()
 		//	ft_printf("Hello %% World! %c", c);
 	return 0;
 }
+*/
+
 
 /*
 int main()

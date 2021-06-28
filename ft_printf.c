@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 02:51:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 04:47:43 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			call_handler(search_specifier((char **)&format), vars);
+			call_handler(search_specifier((char **)&format), (char **)&format, vars);
 			//check_format((char **)&format, vars);
 		}
 		else
