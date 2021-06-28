@@ -6,18 +6,18 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 05:32:25 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 07:08:59 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void call_handler(int handler_choice, char **format, va_list var)
+void	call_handler(int handler_choice, char **format, va_list var)
 {
 	if (handler_choice == 1)
 	{
 		char_handler(format, var);
-	//	ft_putchar(va_arg(var, int));
+/*		ft_putchar(va_arg(var, int));*/
 	}
 	else if (handler_choice == 2)
 		ft_putstr(va_arg(var, char *));
@@ -28,7 +28,7 @@ void call_handler(int handler_choice, char **format, va_list var)
 	else if (handler_choice == 5)
 		ft_putnbr(va_arg(var, unsigned int));
 	else if (handler_choice == 6)
-	   ft_puthex_low(va_arg(var, int));	// UP ???
+		ft_puthex_low(va_arg(var, int)); // UP ???
 	else if (handler_choice == 7)
 		ft_putpercent();
 }
@@ -45,8 +45,8 @@ void call_handler(int handler_choice, char **format, va_list var)
 
 int	search_specifier(char **format)
 {
-	int i;
-	int ret;
+	int	i;
+	int	ret;
 
 	ret = 0;
 	i = 0;

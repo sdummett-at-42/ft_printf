@@ -6,19 +6,17 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 04:47:43 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/28 07:06:48 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-//	int	i;
 	va_list	vars;
+
 	va_start(vars, format);
-	
-//	i = 0;
 	while (*format != '\0')
 	{
 		if (*format == '%')
