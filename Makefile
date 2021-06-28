@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/28 04:44:28 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/29 01:44:07 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,20 @@ AR		= ar
 ARFLAGS = rcs
 CFLAGS	= -Wall -Werror -Wextra -c
 NAME	= ft_printf.a
-SRC		= specifiers_printing/pointer_handler.c \
-		  specifiers_printing/char_handler.c \
-		  specifiers_printing/hexadecimal_handler.c \
-		  specifiers_printing/numbers_handler.c \
-		  specifiers_printing/string_handler.c \
-		  specifiers_printing/ft_putpercent.c \
+
+SRC		= specifiers/c_specifier/char_handler.c \
+		  specifiers/s_specifier/string_handler.c \
+		  specifiers/p_specifier/pointer_handler.c \
+		  specifiers/d_specifier/numbers_handler.c \
+		  specifiers/i_specifier/numbers_handler.c \
+		  specifiers/u_specifier/numbers_handler.c \
+		  specifiers/x_lower_specifier/hexadecimal_handler.c \
+		  specifiers/x_upper_specifier/hexadecimal_handler.c \
+		  specifiers/percent_specifier/ft_putpercent.c \
 		  specifier_handler.c \
 		  ft_printf.c
 
-OBJ = $(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 

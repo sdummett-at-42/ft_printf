@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putaddr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 05:12:17 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/26 10:33:44 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
+/*   Updated: 2021/06/29 01:46:03 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../ft_printf.h"
 
-void	ft_putaddr(void *addr)
+void	ft_putnbr(long long int nb)
 {
-	ft_putstr("0x");
-	ft_puthex_low((long int)addr);
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb *= -1;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar(nb % 10 + 48);
+	}
+	else
+		ft_putchar(nb + 48);	
 }
