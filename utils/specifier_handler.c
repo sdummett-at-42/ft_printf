@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/29 01:50:25 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/29 02:59:13 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@ void	call_handler(int handler_choice, char **format, va_list var)
 	if (handler_choice == 1)
 	{
 		char_handler(format, var);
-/*		ft_putchar(va_arg(var, int));*/
+/*		ft_putchar(va_arg(var, int));
+*/
 	}
 	else if (handler_choice == 2)
-		ft_putstr(va_arg(var, char *));
+	{
+		str_handler(format, var);
+/*		ft_putstr(va_arg(var, char *));
+*/		
+	}
 	else if (handler_choice == 3)
 		ft_putaddr(va_arg(var, void *));
 	else if (handler_choice == 4)

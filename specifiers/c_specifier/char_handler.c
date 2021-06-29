@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/29 01:44:41 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 00:06:24 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static char	*width_flag(char **format, va_list var, int *side)
 	}
 	if (nb < 1)
 	{
-		printf(" < 1\n");
 		*side = -1;
 		return (NULL);
 	}
@@ -126,8 +125,6 @@ void	char_handler(char **format, va_list var)
 		{
 			str = width_flag(format, var, &side);
 			shift_format(format);
-			if (str == NULL)
-				side = -1;
 			if (side == 0)
 			{
 				ft_putstr(str);
@@ -139,7 +136,6 @@ void	char_handler(char **format, va_list var)
 				(*format)++;
 			(*format)++;
 			return ;
-
 		}
 	}
 }

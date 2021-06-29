@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/29 01:50:40 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/29 03:19:52 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC		= specifiers/c_specifier/char_handler.c \
 		  specifiers/x_upper_specifier/hexadecimal_handler.c \
 		  specifiers/percent_specifier/ft_putpercent.c \
 		  utils/specifier_handler.c \
+		  utils/ft_putstr.c \
 		  ft_printf.c
 
 OBJ		= $(SRC:.c=.o)

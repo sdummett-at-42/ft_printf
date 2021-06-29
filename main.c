@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 10:00:40 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/28 08:33:31 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 00:32:07 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int main()
 {
-	ft_printf("%-21c", 'S');
-	printf("||\n%-21c", 'S');
+	ft_printf("%42s", "String");
+	printf("||\n%42s", "String");
 }
 
 /*

@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/29 22:53:22 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/29 03:18:59 by sdummett          #+#    #+#             */
+/*   Updated: 2021/06/29 03:20:35 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_putstr(char *str)
 {
-	va_list	vars;
-
-	va_start(vars, format);
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			call_handler(search_specifier((char **)&format), (char **)&format, vars);
-			//check_format((char **)&format, vars);
-		}
-		else
-		{
-			printf("else ???\n");	
-			ft_putchar(*format);
-			format++;
-		}
-	}
-	va_end(vars);
-	return (42);
+	write(1, str, ft_strlen(str));
 }
-
