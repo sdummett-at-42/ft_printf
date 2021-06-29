@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 00:31:53 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 00:40:42 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static char	*width_flag(char **format, va_list var, int *side, int *len)
 	}
 	else if (**format == '*')
 	{
-		nb = va_arg(var, int) - 1;
+		nb = va_arg(var, int);
+		*len = nb;
 		(*format)++;
 	}
 	if (nb < 1)
