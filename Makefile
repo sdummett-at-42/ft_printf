@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/06/29 03:19:52 by sdummett         ###   ########.fr        #
+#    Updated: 2021/06/30 19:00:20 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME	= ft_printf.a
 SRC		= specifiers/c_specifier/char_handler.c \
 		  specifiers/s_specifier/string_handler.c \
 		  specifiers/p_specifier/pointer_handler.c \
-		  specifiers/d_specifier/numbers_handler.c \
+		  specifiers/d_specifier/integer_handler.c \
 		  specifiers/i_specifier/numbers_handler.c \
 		  specifiers/u_specifier/numbers_handler.c \
 		  specifiers/x_lower_specifier/hexadecimal_handler.c \

@@ -6,11 +6,12 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 05:12:17 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 04:38:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:02:08 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
+
 static void	shift_format(char **format)
 {
 	if (**format == '*')
@@ -21,6 +22,8 @@ static void	shift_format(char **format)
 			(*format)++;
 	}
 }
+
+/*
 static long int conv_nb(long int nb)
 {
 	long int ref;
@@ -30,6 +33,8 @@ static long int conv_nb(long int nb)
 	ref = ref - nb;
 	return (ref);
 }
+*/
+
 static int	len_str(long int nb)
 {
 	int	len;
@@ -44,15 +49,16 @@ static int	len_str(long int nb)
 	}
 	return (len);
 }
-char	*create_hexa_string(long int nb)
+
+char	*create_hexa_string(unsigned long nb)
 {
 	char	*str;
 	char	*hexbase;
 	int		len;
 
 	hexbase = "0123456789abcdef";
-	if (nb < 0)
-		nb = conv_nb(nb);
+//	if (nb < 0)
+//		nb = conv_nb(nb);
 	len = len_str(nb);
 	str = (char *)malloc(sizeof(char) * len + 1);
 	if (nb == 0)
@@ -74,7 +80,7 @@ static void	ft_putaddr_with_width(char *fill, void *addr, int width, int side)
 	int len;
 	char *str;
 
-	str = create_hexa_string(*(long int *)&addr);
+	str = create_hexa_string(*(unsigned long *)&addr);
 	len = ft_strlen(str) + 2;
 	if (width != -1)
 		width = width - len;
