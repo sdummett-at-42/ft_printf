@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 00:40:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 04:10:28 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static char	*width_flag(char **format, va_list var, int *side, int *len)
 
 	*side = 0;
 	nb = 0;
-	//(*format)++;
 	if (**format == '-')
 	{
 		*side = 1;
@@ -93,12 +92,12 @@ static int precision_flag(char **format, va_list var)
 	(*format)++;
 	if (**format <= '9' && **format >= '0')
 	{
-		nb = nb + ft_atoi(*format); // -1 ?
+		nb = nb + ft_atoi(*format);
 		(*format)++;
 	}
 	else if (**format == '*')
 	{
-		nb = va_arg(var, int); // -1
+		nb = va_arg(var, int);
 		(*format)++;
 	}
 	return (nb);
@@ -132,7 +131,6 @@ static void	ft_putstr_with_width(char *fill, char *str, int width, int side)
 				fill++;
 				width--;
 			}
-
 		}
 	}
 	else

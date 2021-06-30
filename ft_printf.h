@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/29 03:50:18 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 04:05:00 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		search_specifier(char **format);
 void	call_handler(int handler_choice, char **format, va_list var);
 void	char_handler(char **format, va_list var);
 void	str_handler(char **format, va_list var);
+void	pointer_handler(char **format, va_list var);
 
 //////////////////////////// 
 

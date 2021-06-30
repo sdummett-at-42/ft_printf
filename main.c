@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 10:00:40 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 00:41:23 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 04:39:32 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int main()
 {
-	ft_printf("%*s", 66, "String");
-	printf("||\n%*s", 66, "String");
+	char *str = "String";
+	ft_printf("%*p", -42, str);
+	printf("||\n%*p",-42, str);
 }
 
 /*
