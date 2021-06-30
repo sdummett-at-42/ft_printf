@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 19:02:36 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:08:39 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	call_handler(int handler_choice, char **format, va_list var)
 	}	
 	else if (handler_choice == 4)
 	{
-//		decimal_handler(format, var);
-		ft_putnbr(va_arg(var, int));
-//*/		
+		integer_handler(format, var);
+/*		ft_putnbr(va_arg(var, int));
+*/		
 	}
 	else if (handler_choice == 5)
 		ft_putnbr(va_arg(var, unsigned int));
