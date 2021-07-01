@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 02:40:36 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 02:47:35 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,8 @@ void	integer_handler(char **format, va_list var)
 		len = ft_strlen(str);
 		str = add_space(str, spec_infos->width, len);
 	}
-	while (**format != 'd')
+	// BUS ERROR HERE
+	while (**format != 'd' && **format != 'i')
 		(*format)++;
 	(*format)++;
 	write(1, str, ft_strlen(str));
