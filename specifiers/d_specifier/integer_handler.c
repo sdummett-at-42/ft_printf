@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 14:40:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 15:37:24 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,14 @@ static char *add_space(char *str, int width, int len)
 	char *new;
 	int i;
 
-	if (width != 0)
+	i = 0;
+	if (width < 0)
 	{
-		i = 0;
-		if (width > 0)
-		{
-			width = width - len;
-			if (width < 0)
-				return (str);
-			new = (char *)malloc(sizeof(char) + len + width + 1);
-			i = insert_spaces(new, width);
-		}
-		else
-			new = (char *)malloc(sizeof(char) + len + \
-					(width * -1) + 1);
+		width = (width * -1) - len;
+		if (width < 0)
+			return (str);
+		new = (char *)malloc(sizeof(char) + len + \
+				width + 1);
 		len = 0;
 		while (str[len] != '\0')
 		{
@@ -141,17 +135,27 @@ static char *add_space(char *str, int width, int len)
 			i++;
 			len++;
 		}
-		if (width < 0)
-		{
-			width = (width * -1) - len;
-			insert_spaces(new + i, width);
-			i = i + width ;
-		}
+		insert_spaces(new + i, width);
+		i = i + width ;
 		new[i] = '\0';
 		free(str);
 		return (new);
 	}
-	return (str);
+	width = width - len;
+	if (width < 0)
+		return (str);
+	new = (char *)malloc(sizeof(char) + len + width + 1);
+	i = insert_spaces(new, width);
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[i] = str[len];
+		i++;
+		len++;
+	}
+	new[i] = '\0';
+	free(str);
+	return (new);
 }
 
 void	integer_handler(char **format, va_list var)
