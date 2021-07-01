@@ -33,7 +33,17 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	spec_infos = struct_initializer();
 	i = 0;
 	neg = 1;
-	if (((*format)[i] >= '0' && (*format)[i] <= '9') || \
+	if ((*format)[i] == '0')
+	{
+		i++;
+		if ((*format)[i] == '*')
+			spec_infos->zero = va_arg(var, int);
+		else
+			spec_infos->zero = ft_atoi(&(*format)[i]);		
+		while ((*format)[i] >= '0' && (*format)[i] <= '9')
+			i++;
+	}
+	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
 			(*format)[i] == '-' || (*format)[i] == '*')
 	{
 		if ((*format)[i] == '-')
@@ -65,32 +75,48 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	return (spec_infos);
 }
 
-static char	*add_zero(char *str, int precision, int len)
+static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
 	int i;
 	int minus;
 	char *new;
 
-	if (precision <= len)
+
+	printf("width_prec : %d | len : %d\n", width_prec, len);
+	if (str[0] == '-' && flag != 1)
+	{
+		printf("str[0] == '-' && flag != 1\n");
+		printf("===> width_prec : %d | len : %d\n", width_prec, len);
+		if (width_prec < len)
+		{
+			printf("return(str)\n");
+			return (str);
+		}
+	}
+	else if (width_prec <= len)
+	{
+		printf("Ayye.\n");
 		return (str);
+	}
 	minus = -1;
-	precision = precision - len;
+	width_prec = width_prec - len;
 	i = 0;
 	if (str[i] == '-')
 	{
-		precision = precision + 1;
-		new = (char *)malloc(sizeof(char) * len + precision + 1);
+		if (flag != 1)
+			width_prec = width_prec + 1;
+		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
 		new[i] = '-';
 		str++;
 		i++;
 	}
 	else
-		new = (char *)malloc(sizeof(char) * len + precision + 1);
-	while (precision != 0)
+		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
+	while (width_prec != 0)
 	{
 		new[i] = '0';
 		i++;
-		precision--;
+		width_prec--;
 	}
 	len = 0;
 	while (str[len] != '\0')
@@ -167,12 +193,24 @@ void	integer_handler(char **format, va_list var)
 	int len = 0;
 
 	spec_infos = integer_parser(format, var);
+	printf("spec_infos->precision : %d\n", spec_infos->precision);
+	printf("spec_infos->width     : %d\n", spec_infos->width);
+	printf("spec_infos->zero      : %d\n", spec_infos->zero);
 	str = ft_itoa(va_arg(var, int));
 	if (spec_infos->precision > 0)
 	{
+		printf("PRECISION\n");
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->precision, len);
+		str = add_zero(str, spec_infos->precision, len, 0);
 	}
+	if (spec_infos->zero > 0 && spec_infos->precision == 0)
+	{
+		printf("ZERO\n");
+		len = ft_strlen(str);
+		str = add_zero(str, spec_infos->zero, len, 1);
+	}
+	else if (spec_infos->zero > 0 && spec_infos->precision != 0)
+		spec_infos->width = spec_infos->zero;
 	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);
