@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 02:14:46 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 02:40:36 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static t_flag_attribs *struct_initializer(void)
 	t_flag_attribs *new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
-	new->star = 0;
 	new->precision = 0;
 	new->width = 0;
 	new->zero = 0;
@@ -68,11 +67,22 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 static char	*add_zero(char *str, int precision, int len)
 {
 	int i;
+	int minus;
 	char *new;
 
+	minus = -1;
 	precision = precision - len;
-	new = (char *)malloc(sizeof(char) * len + precision + 1);
 	i = 0;
+	if (str[i] == '-')
+	{
+		precision = precision + 1;
+		new = (char *)malloc(sizeof(char) * len + precision + 1);
+		new[i] = '-';
+		str++;
+		i++;
+	}
+	else
+		new = (char *)malloc(sizeof(char) * len + precision + 1);
 	while (precision != 0)
 	{
 		new[i] = '0';
@@ -152,8 +162,6 @@ void	integer_handler(char **format, va_list var)
 	int len = 0;
 
 	spec_infos = integer_parser(format, var);
-	printf("spec_infos->width = %d\n", spec_infos->width);
-	printf("spec_infos->precision = %d\n", spec_infos->precision);
 	str = ft_itoa(va_arg(var, int));
 	if (spec_infos->precision > 0)
 	{
@@ -163,18 +171,10 @@ void	integer_handler(char **format, va_list var)
 	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);
-		printf("len = %d\n", len);
 		str = add_space(str, spec_infos->width, len);
 	}
 	while (**format != 'd')
 		(*format)++;
 	(*format)++;
 	write(1, str, ft_strlen(str));
-	return ;
-}
-	else if (**format >= '0' && **format <= '9')
-	{
-		while (**format >= '0' && **format <= '9')
-			(*format)++;
-	}
 }
