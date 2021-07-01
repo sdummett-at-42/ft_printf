@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 15:37:24 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 15:43:17 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static char	*add_zero(char *str, int precision, int len)
 	int minus;
 	char *new;
 
+	if (precision <= len)
+		return (str);
 	minus = -1;
 	precision = precision - len;
 	i = 0;
