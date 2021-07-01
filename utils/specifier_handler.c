@@ -39,7 +39,11 @@ void	call_handler(int handler_choice, char **format, va_list var)
 */		
 	}
 	else if (handler_choice == 5)
-		ft_putnbr(va_arg(var, unsigned int));
+{
+		u_integer_handler(format, var);
+/*		ft_putnbr(va_arg(var, unsigned int));
+*/
+}
 	else if (handler_choice == 6)
 		ft_puthex_low(va_arg(var, int)); // UP ???
 	else if (handler_choice == 7)

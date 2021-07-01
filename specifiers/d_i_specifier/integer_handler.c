@@ -82,20 +82,13 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 	char *new;
 
 
-	printf("width_prec : %d | len : %d\n", width_prec, len);
 	if (str[0] == '-' && flag != 1)
 	{
-		printf("str[0] == '-' && flag != 1\n");
-		printf("===> width_prec : %d | len : %d\n", width_prec, len);
 		if (width_prec < len)
-		{
-			printf("return(str)\n");
 			return (str);
-		}
 	}
 	else if (width_prec <= len)
 	{
-		printf("Ayye.\n");
 		return (str);
 	}
 	minus = -1;
@@ -193,19 +186,14 @@ void	integer_handler(char **format, va_list var)
 	int len = 0;
 
 	spec_infos = integer_parser(format, var);
-	printf("spec_infos->precision : %d\n", spec_infos->precision);
-	printf("spec_infos->width     : %d\n", spec_infos->width);
-	printf("spec_infos->zero      : %d\n", spec_infos->zero);
 	str = ft_itoa(va_arg(var, int));
 	if (spec_infos->precision > 0)
 	{
-		printf("PRECISION\n");
 		len = ft_strlen(str);
 		str = add_zero(str, spec_infos->precision, len, 0);
 	}
 	if (spec_infos->zero > 0 && spec_infos->precision == 0)
 	{
-		printf("ZERO\n");
 		len = ft_strlen(str);
 		str = add_zero(str, spec_infos->zero, len, 1);
 	}
