@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 20:08:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 14:40:28 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ void	pointer_handler(char **format, va_list var);
 void	integer_handler(char ** format, va_list var);
 
 //////////////////////////// 
+
+typedef struct s_flag_attribs
+{
+	int precision;
+	int width;
+	int zero;
+}		t_flag_attribs;
 
 #include "libft/libft.h"
 #include <stdarg.h>

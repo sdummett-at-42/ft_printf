@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   integer_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 02:47:35 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/01 14:40:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	spec_infos = struct_initializer();
 	i = 0;
 	neg = 1;
-	if (((*format)[i] >= '0' && (*format)[i] <= '9') || (*format)[i] == '-' || \
-			(*format)[i] == '*')
+	if (((*format)[i] >= '0' && (*format)[i] <= '9') || \
+			(*format)[i] == '-' || (*format)[i] == '*')
 	{
 		if ((*format)[i] == '-')
 		{
@@ -48,7 +48,8 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 		}
 		else
 			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
-		while (((*format)[i] >= '0' && (*format)[i] <= '9') || (*format)[i] == '-')
+		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
+				(*format)[i] == '-')
 			i++;
 	}
 	if ((*format)[i] == '.')
@@ -100,22 +101,20 @@ static char	*add_zero(char *str, int precision, int len)
 	return (new);
 }
 
-
 static int insert_spaces(char *str, int width)
 {
 	int i;
 
 	i = 0;
-
 	while (width != 0)
 	{
 		str[i] = ' ';
 		width--;
 		i++;
 	}
-	str[i] = '\0';
 	return (i);
 }
+
 static char *add_space(char *str, int width, int len)
 {
 	char *new;
@@ -123,10 +122,9 @@ static char *add_space(char *str, int width, int len)
 
 	if (width != 0)
 	{
-
 		i = 0;
 		if (width > 0)
-		{	
+		{
 			width = width - len;
 			if (width < 0)
 				return (str);
@@ -134,7 +132,8 @@ static char *add_space(char *str, int width, int len)
 			i = insert_spaces(new, width);
 		}
 		else
-			new = (char *)malloc(sizeof(char) + len + (width * -1) + 1);
+			new = (char *)malloc(sizeof(char) + len + \
+					(width * -1) + 1);
 		len = 0;
 		while (str[len] != '\0')
 		{
@@ -143,10 +142,10 @@ static char *add_space(char *str, int width, int len)
 			len++;
 		}
 		if (width < 0)
-		{	
+		{
 			width = (width * -1) - len;
-			return (str);
-			i = insert_spaces(new + i, width);
+			insert_spaces(new + i, width);
+			i = i + width ;
 		}
 		new[i] = '\0';
 		free(str);
@@ -173,7 +172,6 @@ void	integer_handler(char **format, va_list var)
 		len = ft_strlen(str);
 		str = add_space(str, spec_infos->width, len);
 	}
-	// BUS ERROR HERE
 	while (**format != 'd' && **format != 'i')
 		(*format)++;
 	(*format)++;
