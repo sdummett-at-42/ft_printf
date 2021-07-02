@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 03:17:15 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 06:24:03 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*
  * CHEECKER LES PRINTFS AVANT LE PUSH FINAL !
 */
-
+// PROTEGER LES MALLOCS !
 /////////// MYF FUNC ///////
 
 int		ft_printf(const char *format, ...);

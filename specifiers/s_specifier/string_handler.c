@@ -1,179 +1,243 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   string_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 02:12:17 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 06:36:07 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-/*
- * precision > 0  -> found precision flag
- * precsion == -1 -> no precision flag found
- */
-
-static void	shift_format(char **format)
+static t_flag_attribs *struct_initializer(void)
 {
-	if (**format == '*')
-		(*format)++;
-	else if (**format >= '0' && **format <= '9')
-	{
-		while (**format >= '0' && **format <= '9')
-			(*format)++;
-	}
+	t_flag_attribs *new;
+
+	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
+	new->precision = -1;
+	new->width = 0;
+	new->zero = 0;
+	return (new);
 }
 
-static void	ft_putstr_with_precision(char *str, int precision)
+static t_flag_attribs *integer_parser(char **format, va_list var)
 {
-	int len;
+	int i;
+	int neg;
+	t_flag_attribs *spec_infos;
 
-	len = ft_strlen(str);
-	if (precision > 0)
+	spec_infos = struct_initializer();
+	i = 0;
+	neg = 1;
+	if ((*format)[i] == '0')
 	{
-		if (precision < len)
-			write(1, str, precision);
+		i++;
+		if ((*format)[i] == '*')
+			spec_infos->zero = va_arg(var, int);
 		else
-			write(1, str, len);
+			spec_infos->zero = ft_atoi(&(*format)[i]);
+		while ((*format)[i] >= '0' && (*format)[i] <= '9')
+			i++;
 	}
-	if (precision == -1)
-		write(1, str, len);
-}
-
-
-static char	*width_flag(char **format, va_list var, int *side, int *len)
-{
-	int nb;
-	char *str;
-
-	*side = 0;
-	nb = 0;
-	if (**format == '-')
+	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
+			(*format)[i] == '-' || (*format)[i] == '*')
 	{
-		*side = 1;
-		(*format)++;
-	}
-	if (**format <= '9' && **format >= '0')
-	{
-		nb = nb + ft_atoi(*format);
-		*len = nb;
-		(*format)++;
-	}
-	else if (**format == '*')
-	{
-		nb = va_arg(var, int);
-		*len = nb;
-		(*format)++;
-	}
-	if (nb < 1)
-	{
-		*side = -1;
-		return (NULL);
-	}
-	str = (char *)malloc(sizeof(char) * nb + 1);
-	str[nb] = '\0';
-	while (nb != 0)
-	{
-		nb--;
-		str[nb] = ' ';
-	}
-	return (str);
-}
-
-static int precision_flag(char **format, va_list var)
-{
-	int nb;
-
-	nb = 0;
-	(*format)++;
-	if (**format <= '9' && **format >= '0')
-	{
-		nb = nb + ft_atoi(*format);
-		(*format)++;
-	}
-	else if (**format == '*')
-	{
-		nb = va_arg(var, int);
-		(*format)++;
-	}
-	return (nb);
-}
-
-static void	ft_putstr_with_width(char *fill, char *str, int width, int side)
-{
-	int len;
-
-	len = ft_strlen(str);
-	len = ft_strlen(str);
-	if (width != -1)
-		width = width - len;
-	if (width > 0)
-	{
-		if (side == 0)
+		if ((*format)[i] == '-')
 		{
-			while (width)
-			{
-				ft_putchar(*fill);
-				fill++;
-				width--;
-			}
+			neg = -1;
+			i++;
 		}
-		write(1, str, ft_strlen(str));
-		if (side == 1)
+		if ((*format)[i] == '*')
 		{
-			while (width)
-			{
-				ft_putchar(*fill);
-				fill++;
-				width--;
-			}
+			spec_infos->width = va_arg(var, int) * neg;
+			i++;
 		}
+		else
+			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
+		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
+				(*format)[i] == '-')
+			i++;
+	}
+	if ((*format)[i] == '.')
+	{
+		i++;
+		if ((*format)[i] == '*')
+			spec_infos->precision = va_arg(var, int);
+		else
+			spec_infos->precision = ft_atoi(&(*format)[i]);
+		while ((*format)[i] >= '0' && (*format)[i] <= '9')
+			i++;
+	}
+	return (spec_infos);
+}
+
+static char	*add_zero(char *str, int width_prec, int len, int flag)
+{
+	int i;
+	int minus;
+	char *new;
+
+
+	if (str[0] == '-' && flag != 1)
+	{
+		if (width_prec < len)
+			return (str);
+	}
+	else if (width_prec <= len)
+	{
+		return (str);
+	}
+	minus = -1;
+	width_prec = width_prec - len;
+	i = 0;
+	if (str[i] == '-')
+	{
+		if (flag != 1)
+			width_prec = width_prec + 1;
+		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
+		new[i] = '-';
+		str++;
+		i++;
 	}
 	else
+		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
+	while (width_prec != 0)
 	{
-		ft_putstr(str);
+		new[i] = '0';
+		i++;
+		width_prec--;
 	}
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[i] = str[len];
+		i++;
+		len++;
+	}
+	new[i] = '\0';
+	return (new);
+}
+
+static int insert_spaces(char *str, int width)
+{
+	int i;
+
+	i = 0;
+	while (width != 0)
+	{
+		str[i] = ' ';
+		width--;
+		i++;
+	}
+	return (i);
+}
+
+static char *add_space(char *str, int width, int len)
+{
+	char *new;
+	int i;
+
+	i = 0;
+	if (width < 0)
+	{
+		width = (width * -1) - len;
+		if (width < 0)
+			return (str);
+		new = (char *)malloc(sizeof(char) + len + \
+				width + 1);
+		len = 0;
+		while (str[len] != '\0')
+		{
+			new[i] = str[len];
+			i++;
+			len++;
+		}
+		insert_spaces(new + i, width);
+		i = i + width ;
+		new[i] = '\0';
+		free(str);
+		return (new);
+	}
+	width = width - len;
+	if (width < 0)
+		return (str);
+	new = (char *)malloc(sizeof(char) + len + width + 1);
+	i = insert_spaces(new, width);
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[i] = str[len];
+		i++;
+		len++;
+	}
+	new[i] = '\0';
+	free(str);
+	return (new);
+}
+
+static char *create_str(char *str)
+{
+	int len;
+	char *new;
+
+	len = ft_strlen(str);
+	new = (char *)malloc(sizeof(char) * len + 1);
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[len] = str[len];
+		len++;
+	}
+	new[len] = '\0';
+	return (new);
+}
+
+static char *resize_str(char *str, int precision, int len)
+{
+	char *new;
+
+	if (precision >= len)
+		return (str);
+	new = (char *)malloc(sizeof(char) * precision + 1);
+	new[precision] = '\0';
+	while (precision > 0)
+	{
+		precision--;
+		new[precision] = str[precision];
+	}
+	return (new);
 }
 
 void	str_handler(char **format, va_list var)
 {
+	t_flag_attribs *spec_infos;
 	char *str;
-	int nb;
-	int	side;
 	int len = 0;
 
-	if (**format == 's')
+	spec_infos = integer_parser(format, var);
+	str = create_str(va_arg(var, char *));
+	if (spec_infos->precision >= 0)
 	{
-		ft_putstr(va_arg(var, char *));
-		(*format)++;
-		return ;
+		len = ft_strlen(str);
+		str = resize_str(str, spec_infos->precision, len);
 	}
-
+	if (spec_infos->zero > 0 && spec_infos->precision == 0)
+	{
+		len = ft_strlen(str);
+		str = add_zero(str, spec_infos->zero, len, 1);
+	}
+	else if (spec_infos->zero > 0 && spec_infos->precision != 0)
+		spec_infos->width = spec_infos->zero;
+	if (spec_infos->width != 0)
+	{
+		len = ft_strlen(str);
+		str = add_space(str, spec_infos->width, len);
+	}
 	while (**format != 's')
-	{
-		if (**format == '.')
-		{
-			nb = precision_flag(format, var);
-			shift_format(format);
-			ft_putstr_with_precision(va_arg(var, char *), nb);
-			while (**format != 's')
-				(*format)++;
-			(*format)++;
-			return ;
-		}
-		else if ((**format >= '1' && **format <= '9') || **format == '-' || **format == '*')
-		{
-			str = width_flag(format, var, &side, &len);
-			shift_format(format);
-			ft_putstr_with_width(str, va_arg(var, char *), len, side);
-			while (**format != 's')
-				(*format)++;
-			(*format)++;
-			return ;
-		}
-	}
+		(*format)++;
+	(*format)++;
+	write(1, str, ft_strlen(str));
 }
