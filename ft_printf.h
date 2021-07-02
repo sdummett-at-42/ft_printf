@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 01:11:57 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 03:17:15 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	str_handler(char **format, va_list var);
 void	pointer_handler(char **format, va_list var);
 void	integer_handler(char ** format, va_list var);
 void	u_integer_handler(char **format, va_list var);
+void	hexalow_handler(char **format, va_list var);
+void	hexaup_handler(char **format, va_list var);
 char	*ft_uitoa(unsigned int n);
 
 //////////////////////////// 

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 20:08:39 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 03:29:32 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,20 @@
 void	call_handler(int handler_choice, char **format, va_list var)
 {
 	if (handler_choice == 1)
-	{
 		char_handler(format, var);
-/*		ft_putchar(va_arg(var, int));
-*/
-	}
 	else if (handler_choice == 2)
-	{
 		str_handler(format, var);
-/*		ft_putstr(va_arg(var, char *));
-*/		
-	}
 	else if (handler_choice == 3)
-	{
 		pointer_handler(format, var);
-/*		ft_putaddr(va_arg(var, void *));
-*/	
-	}	
 	else if (handler_choice == 4)
-	{
 		integer_handler(format, var);
-/*		ft_putnbr(va_arg(var, int));
-*/		
-	}
 	else if (handler_choice == 5)
-{
 		u_integer_handler(format, var);
-/*		ft_putnbr(va_arg(var, unsigned int));
-*/
-}
 	else if (handler_choice == 6)
-		ft_puthex_low(va_arg(var, int)); // UP ???
+		hexalow_handler(format, var);
 	else if (handler_choice == 7)
+		hexaup_handler(format, var);
+	else if (handler_choice == 8)
 		ft_putpercent();
 }
 
@@ -56,8 +38,9 @@ void	call_handler(int handler_choice, char **format, va_list var)
  *	3 : %p
  *	4 : %d - %i
  *	5 : %u
- *	6 : %x - %X
- *	7 : %%
+ *	6 : %x
+ *	7 : %X
+ *	8 : %%
 */
 
 int	search_specifier(char **format)
@@ -79,10 +62,12 @@ int	search_specifier(char **format)
 			ret = 4;
 		else if ((*format)[i] == 'u')
 			ret = 5;
-		else if ((*format)[i] == 'x' || (*format)[i] == 'X')
+		else if ((*format)[i] == 'x')
 			ret = 6;
-		else if ((*format)[i] == '%')
+		else if ((*format)[i] == 'X')
 			ret = 7;
+		else if ((*format)[i] == '%')
+			ret = 8;
 		else
 			i++;
 		if (ret != 0)
@@ -115,4 +100,5 @@ int main()
 	}
 	return (0);
 }
+E
 */

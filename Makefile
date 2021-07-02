@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/02 01:10:22 by stone            ###   ########.fr        #
+#    Updated: 2021/07/02 03:22:55 by stone            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ SRC		= specifiers/c_specifier/char_handler.c \
 		  specifiers/p_specifier/pointer_handler.c \
 		  specifiers/d_i_specifier/integer_handler.c \
 		  specifiers/u_specifier/u_integer_handler.c \
-		  specifiers/x_lower_specifier/hexadecimal_handler.c \
-		  specifiers/x_upper_specifier/hexadecimal_handler.c \
+		  specifiers/x_lower_specifier/hexalow_handler.c \
+		  specifiers/x_upper_specifier/hexaup_handler.c \
 		  specifiers/percent_specifier/ft_putpercent.c \
 		  utils/specifier_handler.c \
 		  utils/ft_putstr.c \
