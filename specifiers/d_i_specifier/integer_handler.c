@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 08:03:47 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:57:18 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,4 +210,5 @@ void	integer_handler(char **format, va_list var, int *ptf_ret)
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
+	free(str);
 }

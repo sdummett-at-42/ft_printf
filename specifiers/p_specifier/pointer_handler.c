@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/02 08:02:45 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:56:59 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,5 +248,6 @@ void	pointer_handler(char **format, va_list var, int *ptf_ret)
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
+	free(str);
 }
 

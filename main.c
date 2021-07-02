@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 10:00:40 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/30 22:35:18 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 08:58:58 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 int main()
 {
-	char *str = "String";
-	ft_printf("%4.42d", 420);
-	printf("||\n%4.42d", 420);
+	int ft_ret;
+	int ret;
+	char *str = "Stone";
+	//ft_printf("%X", 444);
+	//printf("||\n%X||\n", 444);
+	ft_ret = ft_printf("Yay%c%s%prt%%e%d%i%uall%%ooo%x%XWAW\n", 'S', str, &str, 42, -42, 5555, 1000, 444);
+	ret =       printf("Yay%c%s%prt%%e%d%i%uall%%ooo%x%XWAW\n", 'S', str, &str, 42, -42, 5555, 1000, 444);
+//	printf("\nft_printf : %d | printf : %d\n", ft_ret, ret);
+     //printf("Yay%c%s%prt%%e%d%i%uall%%ooo%x%XWAW\n", 'S', str, &str, 42, -42, 5555, 1000, 444);
+//printf("ft_ret : %d | ret : %d\n", ft_ret, ret);
 }
 
 /*
