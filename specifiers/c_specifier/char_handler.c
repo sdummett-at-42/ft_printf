@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 16:42:29 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:12:22 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,13 @@ static char *add_space(char *str, int width, int len)
 	int i;
 
 	i = 0;
+	if (*str == '\0')
+	{
+		if (width > 0)
+			width = width - 1;
+		else
+			width = width + 1;
+	}
 	if (width < 0)
 	{
 		width = (width * -1) - len;
@@ -217,6 +224,7 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
+	//printf("||\nlen : %d\n", len);
 	free(str);
 	free(spec_infos);
 }
