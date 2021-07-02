@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 03:29:32 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 07:47:45 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	call_handler(int handler_choice, char **format, va_list var)
 	else if (handler_choice == 7)
 		hexaup_handler(format, var);
 	else if (handler_choice == 8)
-		ft_putpercent();
+		percent_handler(format);
 }
 
 /*

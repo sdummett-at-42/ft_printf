@@ -6,13 +6,14 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/06/29 01:45:32 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 07:46:08 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-void	ft_putpercent(void)
+void	percent_handler(char **format)
 {
+	(*format)++;
 	write(1, "%", 1);
 }
