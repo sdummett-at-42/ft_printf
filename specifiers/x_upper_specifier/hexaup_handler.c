@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hexalow_handler.c                                  :+:      :+:    :+:   */
+/*   hexaup_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 03:26:43 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 07:27:02 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ void	hexaup_handler(char **format, va_list var)
 		len = ft_strlen(str);
 		str = add_space(str, spec_infos->width, len);
 	}
-	while (**format != 'x')
+	while (**format != 'X')
 		(*format)++;
 	(*format)++;
 	write(1, str, ft_strlen(str));
