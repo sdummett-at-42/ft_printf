@@ -6,14 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 07:46:08 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:07:43 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-void	percent_handler(char **format)
+void	percent_handler(char **format, int *ptf_ret)
 {
 	(*format)++;
 	write(1, "%", 1);
+	*ptf_ret = *ptf_ret + 1;
 }

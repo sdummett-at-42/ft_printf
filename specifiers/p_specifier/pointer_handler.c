@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/02 07:12:55 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:02:45 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-void	pointer_handler(char **format, va_list var)
+void	pointer_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *spec_infos;
 	char *str;
@@ -245,7 +245,8 @@ void	pointer_handler(char **format, va_list var)
 	while (**format != 'p')
 		(*format)++;
 	(*format)++;
-	//write(1, "0x", 2);
-	write(1, str, ft_strlen(str));
+	len = ft_strlen(str);
+	*ptf_ret = *ptf_ret + len;
+	write(1, str, len);
 }
 

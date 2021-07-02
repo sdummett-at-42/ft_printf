@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 05:46:48 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:08:42 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ static char *char_in_str(char c)
 	return (new);
 }
 
-void	char_handler(char **format, va_list var)
+void	char_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *spec_infos;
 	char *str;
@@ -216,6 +216,8 @@ void	char_handler(char **format, va_list var)
 	while (**format != 'c')
 		(*format)++;
 	(*format)++;
-	write(1, str, ft_strlen(str));
+	len = ft_strlen(str);
+	*ptf_ret = *ptf_ret + len;
+	write(1, str, len);
 }
 

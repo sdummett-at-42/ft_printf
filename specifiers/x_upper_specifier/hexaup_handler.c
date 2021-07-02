@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 07:27:02 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 08:07:03 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-void	hexaup_handler(char **format, va_list var)
+void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *spec_infos;
 	char *str;
@@ -242,5 +242,7 @@ void	hexaup_handler(char **format, va_list var)
 	while (**format != 'X')
 		(*format)++;
 	(*format)++;
-	write(1, str, ft_strlen(str));
+	len = ft_strlen(str);
+	*ptf_ret = *ptf_ret + len;
+	write(1, str, len);
 }

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/01 15:43:17 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 08:03:47 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-void	integer_handler(char **format, va_list var)
+void	integer_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *spec_infos;
 	char *str;
@@ -207,5 +207,7 @@ void	integer_handler(char **format, va_list var)
 	while (**format != 'd' && **format != 'i')
 		(*format)++;
 	(*format)++;
-	write(1, str, ft_strlen(str));
+	len = ft_strlen(str);
+	*ptf_ret = *ptf_ret + len;
+	write(1, str, len);
 }
