@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 08:57:52 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 14:15:06 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 		len++;
 	}
 	new[i] = '\0';
+	free(str);
 	return (new);
 }
 
@@ -246,4 +247,5 @@ void	hexalow_handler(char **format, va_list var, int *ptf_ret)
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
 	free(str);
+	free(spec_infos);
 }

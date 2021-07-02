@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 08:58:07 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 14:17:46 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 		len++;
 	}
 	new[i] = '\0';
+	free(str);
 	return (new);
 }
 
@@ -245,5 +246,6 @@ void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
+	free(spec_infos);
 	free(str);
 }
