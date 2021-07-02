@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 20:58:31 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 21:25:40 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,9 @@ static char *zero_handler(char *str, int zero, int precision)
 
 void	integer_handler(char **format, va_list var, int *pft_ret)
 {
+	int len;
 	char *str;
-	(void)pft_ret;
+	//(void)pft_ret;
 	t_flag_attribs *flag;
 
 	flag = integer_parser(format, var);
@@ -236,10 +237,13 @@ void	integer_handler(char **format, va_list var, int *pft_ret)
 		str = width_handler(str, flag->width);
 	if (flag->zero > 0)
 		str = zero_handler(str, flag->zero, flag->precision);
-	write(1, str, ft_strlen(str));
 	while (**format != 'd' && **format != 'i')
 		(*format)++;
 	(*format)++;
+	len = ft_strlen(str);
+	write(1, str, len);
+	*pft_ret = *pft_ret + len;
+	free(flag);
 	free(str);
 }
 
