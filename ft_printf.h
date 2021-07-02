@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 07:59:22 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 16:42:23 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_puthex_up(long int nb);
 int		check_specifier(char **format, va_list var);
 int		search_specifier(char **format);
 void	call_handler(int handler_choice, char **format, va_list var, int *ptf_ret);
-void	percent_handler(char **format, int *ptf_ret);
+void	percent_handler(char **format, va_list var, int *ptf_ret);
 void	char_handler(char **format, va_list var, int *ptf_ret);
 void	str_handler(char **format, va_list var, int *ptf_ret);
 void	pointer_handler(char **format, va_list var, int *ptf_ret);

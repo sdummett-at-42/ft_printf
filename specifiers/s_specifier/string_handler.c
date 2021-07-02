@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 11:03:07 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:36:08 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,27 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
+static char *create_null_str(void)
+{
+	char *new;
+
+	new = (char *)malloc(sizeof(char) * 7);
+	new[0] = '(';
+	new[1] = 'n';
+	new[2] = 'u';
+	new[3] = 'l';
+	new[4] = 'l';
+	new[5] = ')';
+	new[6] = '\0';
+	return (new);
+}
 static char *create_str(char *str)
 {
 	int len;
 	char *new;
 
+	if (str == NULL)
+		return (create_null_str());
 	len = ft_strlen(str);
 	new = (char *)malloc(sizeof(char) * len + 1);
 	len = 0;
