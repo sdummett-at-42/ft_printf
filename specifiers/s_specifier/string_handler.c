@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 08:56:37 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 11:03:07 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ static char *resize_str(char *str, int precision, int len)
 		precision--;
 		new[precision] = str[precision];
 	}
+	free(str);
 	return (new);
 }
 
@@ -243,4 +244,5 @@ void	str_handler(char **format, va_list var, int *ptf_ret)
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
 	free(str);
+	free(spec_infos);
 }

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 08:56:20 by stone            ###   ########.fr       */
+/*   Updated: 2021/07/02 11:01:47 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 			return (str);
 	}
 	else if (width_prec <= len)
-	{
 		return (str);
-	}
 	minus = -1;
 	width_prec = width_prec - len;
 	i = 0;
@@ -220,5 +218,6 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
 	free(str);
+	free(spec_infos);
 }
 
