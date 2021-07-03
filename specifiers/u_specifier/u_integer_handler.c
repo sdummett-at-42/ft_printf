@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 15:26:57 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:03:47 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	if ((*format)[i] == '0')
 	{
 		i++;
-		if ((*format)[i] == '*')
+		if ((*format)[i] == '-')
+			spec_infos->padding = 0;
+		else if ((*format)[i] == '*')
 			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->padding = ft_atoi(&(*format)[i]);		
+			spec_infos->padding = ft_atoi(&(*format)[i]);
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || (*format)[i] == '*')
 			i++;
 	}
@@ -52,9 +54,13 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 			neg = -1;
 			i++;
 		}
+		while ((*format)[i] == '0')
+			i++;
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int) * neg;
+			spec_infos->width = va_arg(var, int);
+			if (neg == -1 && spec_infos->width > 0)
+				spec_infos->width = spec_infos->width * -1;
 			i++;
 		}
 		else
@@ -194,22 +200,11 @@ static char *pos_wid_handler(char *str, int width, int len)
 	return (new);
 }
 
-static char *check_str_is_eq_zero(char *str, int dot, int len)
-{
-	if (len == 1 && str[0] == '0' && dot == 1)
-	{
-		free(str);
-		return (ft_strdup(""));
-	}
-	return (str);
-}
-
-static char *precision_handler(char *str, int precision, int dot)
+static char *precision_handler(char *str, int precision)
 {
 	int len;
 
 	len = ft_strlen(str);
-	str = check_str_is_eq_zero(str, dot, len);
 	if (str[0] == '-')
 		return (neg_prec_handler(str, precision, len));
 	else
@@ -288,13 +283,12 @@ static char *neg_pad_handler(char *str, int padding, int len)
 	return (new);
 }
 
-static char *zero_handler(char *str, int padding, int precision)
+static char *padding_handler(char *str, int padding, int precision, int dot)
 {
 	int len;
 
 	len = ft_strlen(str);
-
-	 if ( precision > 0)
+	 if (precision > 0 || dot == 1)
 		return (width_handler(str, padding));
 	else if (str[0] == '-')
 		return (neg_pad_handler(str, padding, len));
@@ -302,6 +296,18 @@ static char *zero_handler(char *str, int padding, int precision)
 		return (pos_pad_handler(str, padding, len));
 }
 
+static char *check_str_is_eq_zero(char *str, int dot)
+{
+	int len;
+
+	len = ft_strlen(str);
+	if (len == 1 && str[0] == '0' && dot == 1)
+	{
+		free(str);
+		return (ft_strdup(""));
+	}
+	return (str);
+}
 
 void	u_integer_handler(char **format, va_list var, int *pft_ret)
 {
@@ -310,13 +316,17 @@ void	u_integer_handler(char **format, va_list var, int *pft_ret)
 	t_flag_attribs *flag;
 
 	flag = integer_parser(format, var);
-	str = ft_uitoa(va_arg(var, unsigned int));
-	if (flag->precision > 0 || flag->prec_is_dot == 1)
-		str = precision_handler(str, flag->precision, flag->prec_is_dot);
+	if (flag->prec_is_dot == 0 && flag->padding < 0)
+		flag->width = flag->padding;
+	str = ft_uitoa(va_arg(var, int));
+	str = check_str_is_eq_zero(str, flag->prec_is_dot);
+	if (flag->precision > 0)
+		str = precision_handler(str, flag->precision);
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
-	if (flag->padding > 0)
-		str = zero_handler(str, flag->padding, flag->precision);
+	if (flag->padding > 0 || flag->prec_is_dot == 1)
+		str = padding_handler(str, flag->padding, \
+				flag->precision, flag->prec_is_dot);
 	while (**format != 'u')
 		(*format)++;
 	(*format)++;
