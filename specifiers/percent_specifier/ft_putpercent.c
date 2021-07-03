@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 16:13:17 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:31:53 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_flag_attribs *struct_initializer(void)
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = -1;
 	new->width = 0;
-	new->zero = 0;
+	new->padding = 0;
 	return (new);
 }
 
@@ -36,9 +36,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->zero = va_arg(var, int);
+			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->zero = ft_atoi(&(*format)[i]);
+			spec_infos->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -219,10 +219,10 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 		len = ft_strlen(str);
 		str = resize_str(str, spec_infos->precision, len);
 	}
-	if (spec_infos->zero > 0) //&& spec_infos->precision == 0)
+	if (spec_infos->padding > 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->zero, len, 1);
+		str = add_zero(str, spec_infos->padding, len, 1);
 	}
 	if (spec_infos->width != 0)
 	{

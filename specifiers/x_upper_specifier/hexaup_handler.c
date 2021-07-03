@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 14:17:46 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:30:54 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_flag_attribs *struct_initializer(void)
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
 	new->width = 0;
-	new->zero = 0;
+	new->padding	 = 0;
 	return (new);
 }
 
@@ -72,9 +72,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->zero = va_arg(var, int);
+			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->zero = ft_atoi(&(*format)[i]);
+			spec_infos->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -228,13 +228,13 @@ void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 		len = ft_strlen(str);
 		str = add_zero(str, spec_infos->precision, len, 0);
 	}
-	if (spec_infos->zero > 0 && spec_infos->precision == 0)
+	if (spec_infos->padding > 0 && spec_infos->precision == 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->zero, len, 1);
+		str = add_zero(str, spec_infos->padding, len, 1);
 	}
-	else if (spec_infos->zero > 0 && spec_infos->precision != 0)
-		spec_infos->width = spec_infos->zero;
+	else if (spec_infos->padding > 0 && spec_infos->precision != 0)
+		spec_infos->width = spec_infos->padding;
 	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);

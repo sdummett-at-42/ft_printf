@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 17:12:22 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:23:27 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_flag_attribs *struct_initializer(void)
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
 	new->width = 0;
-	new->zero = 0;
+	new->padding = 0;
 	return (new);
 }
 
@@ -36,9 +36,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->zero = va_arg(var, int);
+			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->zero = ft_atoi(&(*format)[i]);		
+			spec_infos->padding = ft_atoi(&(*format)[i]);		
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -188,6 +188,8 @@ static char *char_in_str(char c)
 	char *new;
 
 	new = (char *)malloc(sizeof(char) * 2);
+	if (new == NULL)
+		return (NULL);
 	new[0] = c;
 	new[1] = '\0';
 	return (new);
@@ -200,19 +202,19 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	int len = 0;
 
 	spec_infos = integer_parser(format, var);
-	str = char_in_str(va_arg(var, int));
+	str = char_in_str(va_arg(var, unsigned int));
 	if (spec_infos->precision > 0)
 	{
 		len = ft_strlen(str);
 		str = add_zero(str, spec_infos->precision, len, 0);
 	}
-	if (spec_infos->zero > 0 && spec_infos->precision == 0)
+	if (spec_infos->padding > 0 && spec_infos->precision == 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->zero, len, 1);
+		str = add_zero(str, spec_infos->padding, len, 1);
 	}
-	else if (spec_infos->zero > 0 && spec_infos->precision != 0)
-		spec_infos->width = spec_infos->zero;
+	else if (spec_infos->padding > 0 && spec_infos->precision != 0)
+		spec_infos->width = spec_infos->padding;
 	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);

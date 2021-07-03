@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 19:11:11 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:33:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ char	*ft_uitoa(unsigned int n);
 typedef struct s_flag_attribs
 {
 	int precision;
+	int prec_is_dot;
 	int width;
-	int zero;
+	int padding;
 }		t_flag_attribs;
 
 #include "libft/libft.h"

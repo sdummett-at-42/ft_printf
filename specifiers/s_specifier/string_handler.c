@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 16:36:08 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 14:24:54 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_flag_attribs *struct_initializer(void)
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = -1;
 	new->width = 0;
-	new->zero = 0;
+	new->padding = 0;
 	return (new);
 }
 
@@ -36,9 +36,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->zero = va_arg(var, int);
+			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->zero = ft_atoi(&(*format)[i]);
+			spec_infos->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -178,27 +178,13 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-static char *create_null_str(void)
-{
-	char *new;
-
-	new = (char *)malloc(sizeof(char) * 7);
-	new[0] = '(';
-	new[1] = 'n';
-	new[2] = 'u';
-	new[3] = 'l';
-	new[4] = 'l';
-	new[5] = ')';
-	new[6] = '\0';
-	return (new);
-}
 static char *create_str(char *str)
 {
 	int len;
 	char *new;
 
 	if (str == NULL)
-		return (create_null_str());
+		return (ft_strdup("(null)"));
 	len = ft_strlen(str);
 	new = (char *)malloc(sizeof(char) * len + 1);
 	len = 0;
@@ -241,13 +227,13 @@ void	str_handler(char **format, va_list var, int *ptf_ret)
 		len = ft_strlen(str);
 		str = resize_str(str, spec_infos->precision, len);
 	}
-	if (spec_infos->zero > 0 && spec_infos->precision == 0)
+	if (spec_infos->padding > 0 && spec_infos->precision == 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->zero, len, 1);
+		str = add_zero(str, spec_infos->padding, len, 1);
 	}
-	else if (spec_infos->zero > 0 && spec_infos->precision != 0)
-		spec_infos->width = spec_infos->zero;
+	else if (spec_infos->padding > 0 && spec_infos->precision != 0)
+		spec_infos->width = spec_infos->padding;
 	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);
