@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:41:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 14:30:54 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 20:55:42 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ static t_flag_attribs *struct_initializer(void)
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
+	new->prec_is_dot = 0;
 	new->width = 0;
-	new->padding	 = 0;
+	new->padding = 0;
 	return (new);
 }
 
@@ -102,8 +103,14 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 		i++;
 		if ((*format)[i] == '*')
 			spec_infos->precision = va_arg(var, int);
-		else
+		else if ((*format)[i] >= '0' && (*format)[i] <= '9')
+		{
 			spec_infos->precision = ft_atoi(&(*format)[i]);
+			if (spec_infos->precision == 0)
+				spec_infos->prec_is_dot = 1;
+		} 
+		else
+			spec_infos->prec_is_dot = 1;
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -215,6 +222,19 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
+static char *check_str_is_eq_zero(char *str, int dot)
+{
+	int len;
+
+	len = ft_strlen(str);
+	if (len == 1 && str[0] == '0' && dot == 1)
+	{
+		free(str);
+		return (ft_strdup(""));
+	}
+	return (str);
+}
+
 void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *spec_infos;
@@ -223,6 +243,7 @@ void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 
 	spec_infos = integer_parser(format, var);
 	str = uitohexup(va_arg(var, unsigned long));
+	str = check_str_is_eq_zero(str, spec_infos->prec_is_dot);
 	if (spec_infos->precision > 0)
 	{
 		len = ft_strlen(str);

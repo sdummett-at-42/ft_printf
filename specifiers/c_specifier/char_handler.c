@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 14:23:27 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 22:13:34 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,28 +197,28 @@ static char *char_in_str(char c)
 
 void	char_handler(char **format, va_list var, int *ptf_ret)
 {
-	t_flag_attribs *spec_infos;
+	t_flag_attribs *flag;
 	char *str;
 	int len = 0;
 
-	spec_infos = integer_parser(format, var);
+	flag = integer_parser(format, var);
 	str = char_in_str(va_arg(var, unsigned int));
-	if (spec_infos->precision > 0)
+	if (flag->precision > 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->precision, len, 0);
+		str = add_zero(str, flag->precision, len, 0);
 	}
-	if (spec_infos->padding > 0 && spec_infos->precision == 0)
+	if (flag->padding > 0 && flag->precision == 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->padding, len, 1);
+		str = add_zero(str, flag->padding, len, 1);
 	}
-	else if (spec_infos->padding > 0 && spec_infos->precision != 0)
-		spec_infos->width = spec_infos->padding;
-	if (spec_infos->width != 0)
+	else if (flag->padding > 0 && flag->precision != 0)
+		flag->width = flag->padding;
+	if (flag->width != 0)
 	{
 		len = ft_strlen(str);
-		str = add_space(str, spec_infos->width, len);
+		str = add_space(str, flag->width, len);
 	}
 	while (**format != 'c')
 		(*format)++;
@@ -226,8 +226,6 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
-	//printf("||\nlen : %d\n", len);
 	free(str);
-	free(spec_infos);
+	free(flag);
 }
-
