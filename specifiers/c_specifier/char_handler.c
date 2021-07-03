@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 22:13:34 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 22:28:59 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,26 +183,30 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-static char *char_in_str(char c)
-{
-	char *new;
-
-	new = (char *)malloc(sizeof(char) * 2);
-	if (new == NULL)
-		return (NULL);
-	new[0] = c;
-	new[1] = '\0';
-	return (new);
-}
+//static char *char_in_str(char c)
+//{
+//	char *new;
+//
+//	new = (char *)malloc(sizeof(char) * 2);
+//	if (new == NULL)
+//		return (NULL);
+//	new[0] = c;
+//	new[1] = '\0';
+//	return (new);
+//}
 
 void	char_handler(char **format, va_list var, int *ptf_ret)
 {
 	t_flag_attribs *flag;
 	char *str;
+	char c;
 	int len = 0;
 
 	flag = integer_parser(format, var);
-	str = char_in_str(va_arg(var, unsigned int));
+	c = va_arg(var, unsigned int);
+	str = ft_strdup("");
+	if (*str == '\0')
+		*ptf_ret = *ptf_ret + 1;
 	if (flag->precision > 0)
 	{
 		len = ft_strlen(str);
@@ -225,7 +229,11 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	(*format)++;
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
-	write(1, str, len);
+	if (flag->width > 0)
+		write(1, str, len);
+	write(1, &c, 1);
+	if (flag->width < 0)
+		write(1, str,len);
 	free(str);
 	free(flag);
 }
