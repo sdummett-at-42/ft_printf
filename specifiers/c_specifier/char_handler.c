@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 22:28:59 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 22:33:37 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,8 +205,9 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	flag = integer_parser(format, var);
 	c = va_arg(var, unsigned int);
 	str = ft_strdup("");
-	if (*str == '\0')
-		*ptf_ret = *ptf_ret + 1;
+	if (str == NULL)
+		return ;
+	*ptf_ret = *ptf_ret + 1;
 	if (flag->precision > 0)
 	{
 		len = ft_strlen(str);
