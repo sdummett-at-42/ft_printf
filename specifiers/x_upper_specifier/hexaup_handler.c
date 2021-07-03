@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 00:00:29 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 00:49:10 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,7 +354,7 @@ void	hexaup_handler(char **format, va_list var, int *pft_ret)
 	flag = integer_parser(format, var);
 	if (flag->prec_is_dot == 0 && flag->padding < 0)
 		flag->width = flag->padding;
-	str = uitohexup(va_arg(var, unsigned long int));
+	str = uitohexup(va_arg(var, unsigned int));
 	str = check_str_is_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
@@ -362,7 +362,7 @@ void	hexaup_handler(char **format, va_list var, int *pft_ret)
 		str = width_handler(str, flag->width);
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
 		str = padding_handler(str, flag->padding, \
-				flag->precision, flag->prec_is_dot);
+	flag->precision, flag->prec_is_dot);
 	while (**format != 'X')
 		(*format)++;
 	(*format)++;

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 23:59:05 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 00:51:24 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,7 +354,7 @@ void	hexalow_handler(char **format, va_list var, int *pft_ret)
 	flag = integer_parser(format, var);
 	if (flag->prec_is_dot == 0 && flag->padding < 0)
 		flag->width = flag->padding;
-	str = uitohexlow(va_arg(var, unsigned long int));
+	str = uitohexlow(va_arg(var, unsigned int));
 	str = check_str_is_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
