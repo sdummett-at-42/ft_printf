@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/03 14:26:15 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/03 19:10:08 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static char	*uitohexlow_addr(unsigned long nb)
 	if (nb == 0)
 		str[2] = '0';
 	str[len] = '\0';
-	//len = len ;
 	while (nb)
 	{
 		str[len - 1] = *(hexbase + nb % 16);
@@ -95,7 +94,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
+			spec_infos->width = ft_atoi(&(*format)[i]);
+		if (spec_infos->width > 0 && neg == -1)
+			spec_infos->width = spec_infos->width * -1;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
