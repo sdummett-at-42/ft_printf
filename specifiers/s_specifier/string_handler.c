@@ -6,15 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 14:24:54 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:49:37 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-static t_flag_attribs *struct_initializer(void)
+static t_flag_attribs	*struct_initializer(void)
 {
-	t_flag_attribs *new;
+	t_flag_attribs	*new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = -1;
@@ -23,11 +23,11 @@ static t_flag_attribs *struct_initializer(void)
 	return (new);
 }
 
-static t_flag_attribs *integer_parser(char **format, va_list var)
+static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
-	int i;
-	int neg;
-	t_flag_attribs *spec_infos;
+	int				i;
+	int				neg;
+	t_flag_attribs	*spec_infos;
 
 	spec_infos = struct_initializer();
 	i = 0;
@@ -76,10 +76,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
-	int i;
-	int minus;
-	char *new;
-
+	int		i;
+	int		minus;
+	char	*new;
 
 	if (str[0] == '-' && flag != 1)
 	{
@@ -121,9 +120,9 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 	return (new);
 }
 
-static int insert_spaces(char *str, int width)
+static int	insert_spaces(char *str, int width)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (width != 0)
@@ -135,10 +134,10 @@ static int insert_spaces(char *str, int width)
 	return (i);
 }
 
-static char *add_space(char *str, int width, int len)
+static char	*add_space(char *str, int width, int len)
 {
-	char *new;
-	int i;
+	char	*new;
+	int		i;
 
 	i = 0;
 	if (width < 0)
@@ -178,10 +177,10 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-static char *create_str(char *str)
+static char	*create_str(char *str)
 {
-	int len;
-	char *new;
+	int		len;
+	char	*new;
 
 	if (str == NULL)
 		return (ft_strdup("(null)"));
@@ -197,9 +196,9 @@ static char *create_str(char *str)
 	return (new);
 }
 
-static char *resize_str(char *str, int precision, int len)
+static char	*resize_str(char *str, int precision, int len)
 {
-	char *new;
+	char	*new;
 
 	if (precision >= len)
 		return (str);
@@ -216,10 +215,11 @@ static char *resize_str(char *str, int precision, int len)
 
 void	str_handler(char **format, va_list var, int *ptf_ret)
 {
-	t_flag_attribs *spec_infos;
-	char *str;
-	int len = 0;
+	t_flag_attribs	*spec_infos;
+	char			*str;
+	int				len;
 
+	len = 0;
 	spec_infos = integer_parser(format, var);
 	str = create_str(va_arg(var, char *));
 	if (spec_infos->precision >= 0)

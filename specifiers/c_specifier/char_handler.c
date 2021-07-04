@@ -6,15 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 22:33:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:46:43 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-static t_flag_attribs *struct_initializer(void)
+static t_flag_attribs	*struct_initializer(void)
 {
-	t_flag_attribs *new;
+	t_flag_attribs	*new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
@@ -23,11 +23,11 @@ static t_flag_attribs *struct_initializer(void)
 	return (new);
 }
 
-static t_flag_attribs *integer_parser(char **format, va_list var)
+static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
-	int i;
-	int neg;
-	t_flag_attribs *spec_infos;
+	int				i;
+	int				neg;
+	t_flag_attribs	*spec_infos;
 
 	spec_infos = struct_initializer();
 	i = 0;
@@ -38,7 +38,7 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 		if ((*format)[i] == '*')
 			spec_infos->padding = va_arg(var, int);
 		else
-			spec_infos->padding = ft_atoi(&(*format)[i]);		
+			spec_infos->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -67,7 +67,7 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 		if ((*format)[i] == '*')
 			spec_infos->precision = va_arg(var, int);
 		else
-			spec_infos->precision = ft_atoi(&(*format)[i]);		
+			spec_infos->precision = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -76,10 +76,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
-	int i;
-	int minus;
-	char *new;
-
+	int		i;
+	int		minus;
+	char	*new;
 
 	if (str[0] == '-' && flag != 1)
 	{
@@ -119,9 +118,9 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 	return (new);
 }
 
-static int insert_spaces(char *str, int width)
+static int	insert_spaces(char *str, int width)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (width != 0)
@@ -133,10 +132,10 @@ static int insert_spaces(char *str, int width)
 	return (i);
 }
 
-static char *add_space(char *str, int width, int len)
+static char	*add_space(char *str, int width, int len)
 {
-	char *new;
-	int i;
+	char	*new;
+	int		i;
 
 	i = 0;
 	if (*str == '\0')
@@ -183,25 +182,14 @@ static char *add_space(char *str, int width, int len)
 	return (new);
 }
 
-//static char *char_in_str(char c)
-//{
-//	char *new;
-//
-//	new = (char *)malloc(sizeof(char) * 2);
-//	if (new == NULL)
-//		return (NULL);
-//	new[0] = c;
-//	new[1] = '\0';
-//	return (new);
-//}
-
 void	char_handler(char **format, va_list var, int *ptf_ret)
 {
-	t_flag_attribs *flag;
-	char *str;
-	char c;
-	int len = 0;
+	t_flag_attribs	*flag;
+	char			*str;
+	char			c;
+	int				len;
 
+	len = 0;
 	flag = integer_parser(format, var);
 	c = va_arg(var, unsigned int);
 	str = ft_strdup("");
@@ -234,7 +222,7 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 		write(1, str, len);
 	write(1, &c, 1);
 	if (flag->width < 0)
-		write(1, str,len);
+		write(1, str, len);
 	free(str);
 	free(flag);
 }

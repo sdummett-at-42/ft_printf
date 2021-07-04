@@ -6,16 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 00:51:24 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 15:11:05 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-
-static t_flag_attribs *struct_initializer(void)
+static t_flag_attribs	*struct_initializer(void)
 {
-	t_flag_attribs *new;
+	t_flag_attribs	*new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
@@ -25,11 +24,11 @@ static t_flag_attribs *struct_initializer(void)
 	return (new);
 }
 
-static t_flag_attribs *integer_parser(char **format, va_list var)
+static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
-	int i;
-	int neg;
-	t_flag_attribs *spec_infos;
+	int				i;
+	int				neg;
+	t_flag_attribs	*spec_infos;
 
 	spec_infos = struct_initializer();
 	i = 0;
@@ -43,7 +42,8 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 			spec_infos->padding = va_arg(var, int);
 		else
 			spec_infos->padding = ft_atoi(&(*format)[i]);
-		while (((*format)[i] >= '0' && (*format)[i] <= '9') || (*format)[i] == '*')
+		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
+				(*format)[i] == '*')
 			i++;
 	}
 	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
@@ -76,7 +76,7 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 			spec_infos->precision = va_arg(var, int);
 		else if ((*format)[i] >= '0' && (*format)[i] <= '9')
 		{
-			spec_infos->precision = ft_atoi(&(*format)[i]);		
+			spec_infos->precision = ft_atoi(&(*format)[i]);
 			if (spec_infos->precision == 0)
 				spec_infos->prec_is_dot = 1;
 		}
@@ -88,10 +88,10 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 	return (spec_infos);
 }
 
-static char *pos_prec_handler(char *str, int precision, int len)
+static char	*pos_prec_handler(char *str, int precision, int len)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	if (precision <= len)
 		return (str);
@@ -117,10 +117,10 @@ static char *pos_prec_handler(char *str, int precision, int len)
 	return (new);
 }
 
-static char *neg_prec_handler(char *str, int precision, int len)
+static char	*neg_prec_handler(char *str, int precision, int len)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	if (!(precision + 1 >= len))
 		return (str);
@@ -146,10 +146,10 @@ static char *neg_prec_handler(char *str, int precision, int len)
 	return (new);
 }
 
-static char *neg_wid_handler(char *str, int width, int len)
+static char	*neg_wid_handler(char *str, int width, int len)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	if (width <= len)
 		return (str);
@@ -172,10 +172,10 @@ static char *neg_wid_handler(char *str, int width, int len)
 	return (new);
 }
 
-static char *pos_wid_handler(char *str, int width, int len)
+static char	*pos_wid_handler(char *str, int width, int len)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	if (width <= len)
 		return (str);
@@ -195,14 +195,14 @@ static char *pos_wid_handler(char *str, int width, int len)
 		i++;
 		len++;
 	}
-	new[i]= '\0';
+	new[i] = '\0';
 	free(str);
 	return (new);
 }
 
-static char *precision_handler(char *str, int precision)
+static char	*precision_handler(char *str, int precision)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (str[0] == '-')
@@ -211,10 +211,9 @@ static char *precision_handler(char *str, int precision)
 		return (pos_prec_handler(str, precision, len));
 }
 
-
-static char *width_handler(char *str, int width)
+static char	*width_handler(char *str, int width)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (width < 0)
@@ -222,11 +221,11 @@ static char *width_handler(char *str, int width)
 	return (pos_wid_handler(str, width, len));
 }
 
-static char *pos_pad_handler(char *str, int padding, int len)
+static char	*pos_pad_handler(char *str, int padding, int len)
 {
-	int i;
-	char *new;
-	
+	int		i;
+	char	*new;
+
 	if (padding <= len)
 		return (str);
 	new = malloc(sizeof(char) * padding + 1);
@@ -252,10 +251,10 @@ static char *pos_pad_handler(char *str, int padding, int len)
 	return (new);
 }
 
-static char *neg_pad_handler(char *str, int padding, int len)
+static char	*neg_pad_handler(char *str, int padding, int len)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	if (padding <= len)
 		return (str);
@@ -283,9 +282,9 @@ static char *neg_pad_handler(char *str, int padding, int len)
 	return (new);
 }
 
-static char *padding_handler(char *str, int padding, int precision, int dot)
+static char	*padding_handler(char *str, int padding, int precision, int dot)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	 if (precision > 0 || dot == 1)
@@ -296,9 +295,9 @@ static char *padding_handler(char *str, int padding, int precision, int dot)
 		return (pos_pad_handler(str, padding, len));
 }
 
-static char *check_str_is_eq_zero(char *str, int dot)
+static char	*check_str_is_eq_zero(char *str, int dot)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (len == 1 && str[0] == '0' && dot == 1)
@@ -347,9 +346,9 @@ static char	*uitohexlow(unsigned long nb)
 
 void	hexalow_handler(char **format, va_list var, int *pft_ret)
 {
-	int len;
-	char *str;
-	t_flag_attribs *flag;
+	int				len;
+	char			*str;
+	t_flag_attribs	*flag;
 
 	flag = integer_parser(format, var);
 	if (flag->prec_is_dot == 0 && flag->padding < 0)

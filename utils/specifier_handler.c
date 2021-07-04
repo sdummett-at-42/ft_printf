@@ -6,11 +6,22 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 19:11:14 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 15:19:18 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	1 : %c
+ *	2 : %s
+ *	3 : %p
+ *	4 : %d - %i
+ *	5 : %u
+ *	6 : %x
+ *	7 : %X
+ *	8 : %%
+*/
 
 void	call_handler(int handler_choice, char **format, va_list var, int *len)
 {
@@ -31,17 +42,6 @@ void	call_handler(int handler_choice, char **format, va_list var, int *len)
 	else if (handler_choice == 8)
 		percent_handler(format, var, len);
 }
-
-/*
- *	1 : %c
- *	2 : %s
- *	3 : %p
- *	4 : %d - %i
- *	5 : %u
- *	6 : %x
- *	7 : %X
- *	8 : %%
-*/
 
 int	search_specifier(char **format)
 {
@@ -75,30 +75,3 @@ int	search_specifier(char **format)
 	}
 	return (ret);
 }
-
-/*
- *	Main test for this function (search_specifier)
- *	OK !
-*/
-
-/*
-int main()
-{
-	int i;
-	char *format = "%vfc    %vvs %    p % f f  d %    i % u %nnx %       l  X %l%";
-
-	i = 0;
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			printf("specifier = %d\n", search_specifier(&format));
-		}
-		else
-			format++;
-	}
-	return (0);
-}
-E
-*/

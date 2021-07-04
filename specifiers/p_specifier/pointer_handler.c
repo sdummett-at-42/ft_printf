@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/03 19:10:08 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:53:11 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	len_str(unsigned long nb)
 {
 	int	len;
-	
+
 	if (nb == 0)
 		return (1);
 	len = 0;
@@ -50,9 +50,9 @@ static char	*uitohexlow_addr(unsigned long nb)
 	return (str);
 }
 
-static t_flag_attribs *struct_initializer(void)
+static t_flag_attribs	*struct_initializer(void)
 {
-	t_flag_attribs *new;
+	t_flag_attribs	*new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = 0;
@@ -61,11 +61,11 @@ static t_flag_attribs *struct_initializer(void)
 	return (new);
 }
 
-static t_flag_attribs *integer_parser(char **format, va_list var)
+static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
-	int i;
-	int neg;
-	t_flag_attribs *spec_infos;
+	int				i;
+	int				neg;
+	t_flag_attribs	*spec_infos;
 
 	spec_infos = struct_initializer();
 	i = 0;
@@ -116,10 +116,9 @@ static t_flag_attribs *integer_parser(char **format, va_list var)
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
-	int i;
-	int minus;
-	char *new;
-
+	int		i;
+	int		minus;
+	char	*new;
 
 	if (str[0] == '-' && flag != 1)
 	{
@@ -161,9 +160,9 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 	return (new);
 }
 
-static int insert_spaces(char *str, int width)
+static int	insert_spaces(char *str, int width)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (width != 0)
@@ -175,10 +174,10 @@ static int insert_spaces(char *str, int width)
 	return (i);
 }
 
-static char *add_space(char *str, int width, int len)
+static char	*add_space(char *str, int width, int len)
 {
-	char *new;
-	int i;
+	char	*new;
+	int		i;
 
 	i = 0;
 	if (width < 0)
@@ -220,10 +219,11 @@ static char *add_space(char *str, int width, int len)
 
 void	pointer_handler(char **format, va_list var, int *ptf_ret)
 {
-	t_flag_attribs *spec_infos;
-	char *str;
-	int len = 0;
+	t_flag_attribs	*spec_infos;
+	char			*str;
+	int				len;
 
+	len = 0;
 	spec_infos = integer_parser(format, var);
 	str = uitohexlow_addr(va_arg(var, unsigned long));
 	if (spec_infos->precision > 0)
@@ -252,4 +252,3 @@ void	pointer_handler(char **format, va_list var, int *ptf_ret)
 	free(str);
 	free(spec_infos);
 }
-

@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 01:02:59 by stone             #+#    #+#             */
-/*   Updated: 2021/07/02 11:13:18 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 15:21:06 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	inttoascii(char *str, unsigned long int tmp, int size_n)
 
 char	*ft_uitoa(unsigned int n)
 {
-	int			size_n;
-	char		*str;
+	int					size_n;
 	unsigned long int	tmp;
+	char				*str;
 
 	str = NULL;
 	tmp = n;

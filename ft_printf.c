@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/02 21:51:09 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:41:13 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printf(const char *format, ...)
 {
-	int len;
+	int		len;
 	va_list	vars;
 
 	len = 0;
@@ -37,4 +37,3 @@ int	ft_printf(const char *format, ...)
 	va_end(vars);
 	return (len);
 }
-
