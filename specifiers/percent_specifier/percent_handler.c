@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_handler.c                                     :+:      :+:    :+:   */
+/*   ft_putpercent.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 17:46:39 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/04 15:17:19 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static t_flag_attribs	*struct_initializer(void)
 	t_flag_attribs	*new;
 
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
-	new->precision = 0;
-	new->prec_is_dot = 0;
+	new->precision = -1;
 	new->width = 0;
 	new->padding = 0;
 	return (new);
@@ -53,13 +52,11 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 		}
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int);
+			spec_infos->width = va_arg(var, int) * neg;
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]);
-		if (spec_infos->width > 0)
-			spec_infos->width = spec_infos->width * neg;
+			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
@@ -89,7 +86,9 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 			return (str);
 	}
 	else if (width_prec <= len)
+	{
 		return (str);
+	}
 	minus = -1;
 	width_prec = width_prec - len;
 	i = 0;
@@ -137,17 +136,10 @@ static int	insert_spaces(char *str, int width)
 
 static char	*add_space(char *str, int width, int len)
 {
-	char	*new;
 	int		i;
+	char	*new;
 
 	i = 0;
-	if (*str == '\0')
-	{
-		if (width > 0)
-			width = width - 1;
-		else
-			width = width + 1;
-	}
 	if (width < 0)
 	{
 		width = (width * -1) - len;
@@ -185,47 +177,63 @@ static char	*add_space(char *str, int width, int len)
 	return (new);
 }
 
-void	char_handler(char **format, va_list var, int *ptf_ret)
+static char	*resize_str(char *str, int precision, int len)
 {
-	t_flag_attribs	*flag;
-	char			*str;
-	char			c;
+	char	*new;
+
+	if (precision >= len)
+		return (str);
+	new = (char *)malloc(sizeof(char) * precision + 1);
+	new[precision] = '\0';
+	while (precision > 0)
+	{
+		precision--;
+		new[precision] = str[precision];
+	}
+	free(str);
+	return (new);
+}
+
+char	*create_percent(void)
+{
+	char	*new;
+
+	new = (char *)malloc(sizeof(char) * 2);
+	new[0] = '%';
+	new[1] = '\0';
+	return (new);
+}
+
+void	percent_handler(char **format, va_list var, int *ptf_ret)
+{
 	int				len;
+	char			*str;
+	t_flag_attribs	*spec_infos;
 
 	len = 0;
-	flag = integer_parser(format, var);
-	c = va_arg(var, unsigned int);
-	str = ft_strdup("");
-	if (str == NULL)
-		return ;
-	*ptf_ret = *ptf_ret + 1;
-	if (flag->precision > 0)
+	spec_infos = integer_parser(format, var);
+	str = create_percent();
+	if (spec_infos->precision >= 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, flag->precision, len, 0);
+		str = resize_str(str, spec_infos->precision, len);
 	}
-	if (flag->padding > 0 && flag->precision == 0)
+	if (spec_infos->padding > 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, flag->padding, len, 1);
+		str = add_zero(str, spec_infos->padding, len, 1);
 	}
-	else if (flag->padding > 0 && flag->precision != 0)
-		flag->width = flag->padding;
-	if (flag->width != 0)
+	if (spec_infos->width != 0)
 	{
 		len = ft_strlen(str);
-		str = add_space(str, flag->width, len);
+		str = add_space(str, spec_infos->width, len);
 	}
-	while (**format != 'c')
+	while (**format != '%')
 		(*format)++;
 	(*format)++;
 	len = ft_strlen(str);
 	*ptf_ret = *ptf_ret + len;
-	if (flag->width > 0)
-		write(1, str, len);
-	write(1, &c, 1);
-	if (flag->width < 0)
-		write(1, str, len);
+	write(1, str, len);
 	free(str);
-	free(flag);
+	free(spec_infos);
 }

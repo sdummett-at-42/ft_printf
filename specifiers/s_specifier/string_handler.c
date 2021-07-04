@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 14:49:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:05:51 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_flag_attribs	*struct_initializer(void)
 	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
 	new->precision = -1;
 	new->width = 0;
+	new->prec_is_dot = 0;
 	new->padding = 0;
 	return (new);
 }
@@ -52,11 +53,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 		}
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int) * neg;
+			spec_infos->width = va_arg(var, int);
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
+			spec_infos->width = ft_atoi(&(*format)[i]);
+		if (spec_infos->width > 0)
+			spec_infos->width = spec_infos->width * neg;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
