@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 15:02:53 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/04 16:40:07 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,12 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
+		{	
 			spec_infos->precision = va_arg(var, int);
-		else if ((*format)[i] >= '0' && (*format)[i] <= '9')
-		{
-			spec_infos->precision = ft_atoi(&(*format)[i]);
-			if (spec_infos->precision == 0)
-				spec_infos->prec_is_dot = 1;
 		}
-		else
+		else if ((*format)[i] >= '0' && (*format)[i] <= '9')
+			spec_infos->precision = ft_atoi(&(*format)[i]);
+		if (spec_infos->precision == 0)
 			spec_infos->prec_is_dot = 1;
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
