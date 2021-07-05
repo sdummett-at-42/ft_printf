@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/03 14:33:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:40:37 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 // PROTEGER LES MALLOCS !
 /////////// MYF FUNC ///////
 
-int		ft_printf(const char *format, ...);
+int        ft_printf(const char *format, ...)
+        __attribute__((format (printf, 1, 2)));
 void	ft_putchar(char c);
 void	ft_putaddr(void *addr);
 void	ft_putstr(char *str);

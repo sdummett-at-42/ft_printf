@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putpercent.c                                    :+:      :+:    :+:   */
+/*   percent_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 15:17:19 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:20:05 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
 	int				i;
 	int				neg;
-	t_flag_attribs	*spec_infos;
+	t_flag_attribs	*flag;
 
-	spec_infos = struct_initializer();
+	flag = struct_initializer();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->padding = va_arg(var, int);
+			flag->padding = va_arg(var, int);
 		else
-			spec_infos->padding = ft_atoi(&(*format)[i]);
+			flag->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -52,11 +52,11 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 		}
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int) * neg;
+			flag->width = va_arg(var, int) * neg;
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]) * neg;
+			flag->width = ft_atoi(&(*format)[i]) * neg;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
@@ -65,13 +65,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->precision = va_arg(var, int);
+			flag->precision = va_arg(var, int);
 		else
-			spec_infos->precision = ft_atoi(&(*format)[i]);
+			flag->precision = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
-	return (spec_infos);
+	return (flag);
 }
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
@@ -208,25 +208,25 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 {
 	int				len;
 	char			*str;
-	t_flag_attribs	*spec_infos;
+	t_flag_attribs	*flag;
 
 	len = 0;
-	spec_infos = integer_parser(format, var);
+	flag = integer_parser(format, var);
 	str = create_percent();
-	if (spec_infos->precision >= 0)
+	if (flag->precision >= 0)
 	{
 		len = ft_strlen(str);
-		str = resize_str(str, spec_infos->precision, len);
+		str = resize_str(str, flag->precision, len);
 	}
-	if (spec_infos->padding > 0)
+	if (flag->padding > 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->padding, len, 1);
+		str = add_zero(str, flag->padding, len, 1);
 	}
-	if (spec_infos->width != 0)
+	if (flag->width != 0)
 	{
 		len = ft_strlen(str);
-		str = add_space(str, spec_infos->width, len);
+		str = add_space(str, flag->width, len);
 	}
 	while (**format != '%')
 		(*format)++;
@@ -235,5 +235,5 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
 	free(str);
-	free(spec_infos);
+	free(flag);
 }

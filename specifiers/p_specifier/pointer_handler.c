@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/04 14:53:11 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:20:42 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,18 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
 	int				i;
 	int				neg;
-	t_flag_attribs	*spec_infos;
+	t_flag_attribs	*flag;
 
-	spec_infos = struct_initializer();
+	flag = struct_initializer();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->padding = va_arg(var, int);
+			flag->padding = va_arg(var, int);
 		else
-			spec_infos->padding = ft_atoi(&(*format)[i]);
+			flag->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -90,13 +90,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 		}
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int) * neg;
+			flag->width = va_arg(var, int) * neg;
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]);
-		if (spec_infos->width > 0 && neg == -1)
-			spec_infos->width = spec_infos->width * -1;
+			flag->width = ft_atoi(&(*format)[i]);
+		if (flag->width > 0 && neg == -1)
+			flag->width = flag->width * -1;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
@@ -105,13 +105,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->precision = va_arg(var, int);
+			flag->precision = va_arg(var, int);
 		else
-			spec_infos->precision = ft_atoi(&(*format)[i]);
+			flag->precision = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
-	return (spec_infos);
+	return (flag);
 }
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
@@ -219,29 +219,29 @@ static char	*add_space(char *str, int width, int len)
 
 void	pointer_handler(char **format, va_list var, int *ptf_ret)
 {
-	t_flag_attribs	*spec_infos;
+	t_flag_attribs	*flag;
 	char			*str;
 	int				len;
 
 	len = 0;
-	spec_infos = integer_parser(format, var);
+	flag = integer_parser(format, var);
 	str = uitohexlow_addr(va_arg(var, unsigned long));
-	if (spec_infos->precision > 0)
+	if (flag->precision > 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->precision, len, 0);
+		str = add_zero(str, flag->precision, len, 0);
 	}
-	if (spec_infos->padding > 0 && spec_infos->precision == 0)
+	if (flag->padding > 0 && flag->precision == 0)
 	{
 		len = ft_strlen(str);
-		str = add_zero(str, spec_infos->padding, len, 1);
+		str = add_zero(str, flag->padding, len, 1);
 	}
-	else if (spec_infos->padding > 0 && spec_infos->precision != 0)
-		spec_infos->width = spec_infos->padding;
-	if (spec_infos->width != 0)
+	else if (flag->padding > 0 && flag->precision != 0)
+		flag->width = flag->padding;
+	if (flag->width != 0)
 	{
 		len = ft_strlen(str);
-		str = add_space(str, spec_infos->width, len);
+		str = add_space(str, flag->width, len);
 	}
 	while (**format != 'p')
 		(*format)++;
@@ -250,5 +250,5 @@ void	pointer_handler(char **format, va_list var, int *ptf_ret)
 	*ptf_ret = *ptf_ret + len;
 	write(1, str, len);
 	free(str);
-	free(spec_infos);
+	free(flag);
 }

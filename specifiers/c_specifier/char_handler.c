@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 17:46:39 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:18:16 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
 	int				i;
 	int				neg;
-	t_flag_attribs	*spec_infos;
+	t_flag_attribs	*flag;
 
-	spec_infos = struct_initializer();
+	flag = struct_initializer();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->padding = va_arg(var, int);
+			flag->padding = va_arg(var, int);
 		else
-			spec_infos->padding = ft_atoi(&(*format)[i]);
+			flag->padding = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -53,13 +53,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 		}
 		if ((*format)[i] == '*')
 		{
-			spec_infos->width = va_arg(var, int);
+			flag->width = va_arg(var, int);
 			i++;
 		}
 		else
-			spec_infos->width = ft_atoi(&(*format)[i]);
-		if (spec_infos->width > 0)
-			spec_infos->width = spec_infos->width * neg;
+			flag->width = ft_atoi(&(*format)[i]);
+		if (flag->width > 0)
+			flag->width = flag->width * neg;
 		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
 				(*format)[i] == '-')
 			i++;
@@ -68,13 +68,13 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	{
 		i++;
 		if ((*format)[i] == '*')
-			spec_infos->precision = va_arg(var, int);
+			flag->precision = va_arg(var, int);
 		else
-			spec_infos->precision = ft_atoi(&(*format)[i]);
+			flag->precision = ft_atoi(&(*format)[i]);
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
-	return (spec_infos);
+	return (flag);
 }
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
