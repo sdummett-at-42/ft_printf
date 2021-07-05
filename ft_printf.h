@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 18:32:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 23:21:31 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	u_integer_handler(char **format, va_list var, int *ptf_ret);
 void	hexalow_handler(char **format, va_list var, int *ptf_ret);
 void	hexaup_handler(char **format, va_list var, int *ptf_ret);
 char	*ft_uitoa(unsigned int n);
-t_flag_attribs	*struct_initializer(void);
+t_flag_attribs	*struct_init(void);
 
 //////////////////////////// 
 

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 22:29:13 by sdummett          #+#    #+#             */
-/*   Updated: 2021/03/23 16:18:54 by sdummett         ###   ########.fr       */
+/*   Created: 2021/07/05 18:27:48 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/05 23:20:16 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../ft_printf.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t len)
+t_flag_attribs	*struct_init(void)
 {
-	while (len)
-	{
-		if (*(unsigned char *)src == (unsigned char)c)
-		{
-			*(unsigned char *)dst = (unsigned char)c;
-			return (dst + 1);
-		}
-		*(unsigned char *)dst = *(unsigned char *)src;
-		dst++;
-		src++;
-		len--;
-	}
-	return (0);
+	t_flag_attribs	*new;
+
+	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
+	new->precision = 0;
+	new->prec_is_dot = 0;
+	new->width = 0;
+	new->padding = 0;
+	return (new);
 }
