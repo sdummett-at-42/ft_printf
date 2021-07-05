@@ -6,22 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 18:20:05 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:40:42 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
-
-static t_flag_attribs	*struct_initializer(void)
-{
-	t_flag_attribs	*new;
-
-	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
-	new->precision = -1;
-	new->width = 0;
-	new->padding = 0;
-	return (new);
-}
 
 static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
@@ -68,6 +57,8 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 			flag->precision = va_arg(var, int);
 		else
 			flag->precision = ft_atoi(&(*format)[i]);
+		if (flag->precision == 0)
+			flag->prec_is_dot = 1;
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -213,7 +204,7 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 	len = 0;
 	flag = integer_parser(format, var);
 	str = create_percent();
-	if (flag->precision >= 0)
+	if (flag->precision > 0 || flag->prec_is_dot == 1)
 	{
 		len = ft_strlen(str);
 		str = resize_str(str, flag->precision, len);

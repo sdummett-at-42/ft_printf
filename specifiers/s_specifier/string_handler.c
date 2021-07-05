@@ -6,23 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 18:19:36 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:38:31 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
-
-static t_flag_attribs	*struct_initializer(void)
-{
-	t_flag_attribs	*new;
-
-	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
-	new->precision = -1;
-	new->width = 0;
-	new->prec_is_dot = 0;
-	new->padding = 0;
-	return (new);
-}
 
 static t_flag_attribs	*integer_parser(char **format, va_list var)
 {
@@ -71,6 +59,8 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 			flag->precision = va_arg(var, int);
 		else
 			flag->precision = ft_atoi(&(*format)[i]);
+		if (flag->precision == 0)
+			flag->prec_is_dot = 1;
 		while ((*format)[i] >= '0' && (*format)[i] <= '9')
 			i++;
 	}
@@ -80,7 +70,6 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
 	int		i;
-	int		minus;
 	char	*new;
 
 	if (str[0] == '-' && flag != 1)
@@ -89,10 +78,7 @@ static char	*add_zero(char *str, int width_prec, int len, int flag)
 			return (str);
 	}
 	else if (width_prec <= len)
-	{
 		return (str);
-	}
-	minus = -1;
 	width_prec = width_prec - len;
 	i = 0;
 	if (str[i] == '-')
@@ -225,17 +211,17 @@ void	str_handler(char **format, va_list var, int *ptf_ret)
 	len = 0;
 	flag = integer_parser(format, var);
 	str = create_str(va_arg(var, char *));
-	if (flag->precision >= 0)
+	if (flag->precision > 0 || flag->prec_is_dot == 1)
 	{
 		len = ft_strlen(str);
 		str = resize_str(str, flag->precision, len);
 	}
-	if (flag->padding > 0 && flag->precision == 0)
+	if (flag->padding > 0 && flag->prec_is_dot == 1)
 	{
 		len = ft_strlen(str);
 		str = add_zero(str, flag->padding, len, 1);
 	}
-	else if (flag->padding > 0 && flag->precision != 0)
+	else if (flag->padding > 0 && flag->precision > 0)
 		flag->width = flag->padding;
 	if (flag->width != 0)
 	{

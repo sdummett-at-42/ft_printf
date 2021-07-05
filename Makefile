@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/04 15:30:18 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/05 18:31:14 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC		= specifiers/c_specifier/char_handler.c \
 		  utils/ft_putchar.c \
 		  utils/ft_putstr.c \
 		  utils/uitoa.c \
+		  utils/ptf_struct_initializer.c \
 		  ft_printf.c
 
 OBJ		= $(SRC:.c=.o)

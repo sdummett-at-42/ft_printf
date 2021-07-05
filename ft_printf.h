@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 11:40:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:32:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 */
 // PROTEGER LES MALLOCS !
 /////////// MYF FUNC ///////
+
+typedef struct s_flag_attribs
+{
+	int precision;
+	int prec_is_dot;
+	int width;
+	int padding;
+}		t_flag_attribs;
 
 int        ft_printf(const char *format, ...)
         __attribute__((format (printf, 1, 2)));
@@ -45,16 +53,10 @@ void	u_integer_handler(char **format, va_list var, int *ptf_ret);
 void	hexalow_handler(char **format, va_list var, int *ptf_ret);
 void	hexaup_handler(char **format, va_list var, int *ptf_ret);
 char	*ft_uitoa(unsigned int n);
+t_flag_attribs	*struct_initializer(void);
 
 //////////////////////////// 
 
-typedef struct s_flag_attribs
-{
-	int precision;
-	int prec_is_dot;
-	int width;
-	int padding;
-}		t_flag_attribs;
 
 #include "libft/libft.h"
 #include <stdarg.h>

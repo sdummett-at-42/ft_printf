@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/05 18:20:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:35:44 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,6 @@ static char	*uitohexlow_addr(unsigned long nb)
 		len--;
 	}
 	return (str);
-}
-
-static t_flag_attribs	*struct_initializer(void)
-{
-	t_flag_attribs	*new;
-
-	new = (t_flag_attribs *)malloc(sizeof(t_flag_attribs) * 1);
-	new->precision = 0;
-	new->width = 0;
-	new->padding = 0;
-	return (new);
 }
 
 static t_flag_attribs	*integer_parser(char **format, va_list var)
