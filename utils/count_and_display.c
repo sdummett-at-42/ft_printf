@@ -6,16 +6,16 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 13:26:22 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:06:40 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 00:20:13 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.c"
+#include "../ft_printf.h"
 
-void count_and_display(char **format, char *str, char c, int *ptf_ret)
+void	count_and_display(char **format, char *str, char c, int *ptf_ret)
 {
-	int len;
-	
+	int	len;
+
 	if (c == 'd')
 	{
 		while (**format != c && **format != 'i')

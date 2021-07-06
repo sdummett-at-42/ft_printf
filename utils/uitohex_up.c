@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:19:42 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:25:22 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 00:21:21 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*uitohex_up(unsigned long nb)
 	str[len] = 0;
 	while (nb)
 	{
-		str[len - 1] = *(hexbase_up+ nb % 16);
+		str[len - 1] = *(hexbase_up + nb % 16);
 		nb = nb / 16;
 		len--;
 	}

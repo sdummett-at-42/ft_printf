@@ -6,13 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:41:54 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:56:36 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 00:21:43 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-
-
 
 static char	*neg_wid_handler(char *str, int width, int len)
 {
@@ -77,4 +75,3 @@ char	*width_handler(char *str, int width)
 		return (neg_wid_handler(str, width * -1, len));
 	return (pos_wid_handler(str, width, len));
 }
-

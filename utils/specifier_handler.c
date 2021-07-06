@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/04 15:19:18 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 00:18:29 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  *	6 : %x
  *	7 : %X
  *	8 : %%
-*/
+ */
 
 void	call_handler(int handler_choice, char **format, va_list var, int *len)
 {
@@ -43,6 +43,26 @@ void	call_handler(int handler_choice, char **format, va_list var, int *len)
 		percent_handler(format, var, len);
 }
 
+static void	search_specifier_bis(char **format, int *ret, int *i)
+{
+	if ((*format)[*i] == 'c')
+		*ret = 1;
+	else if ((*format)[*i] == 's')
+		*ret = 2;
+	else if ((*format)[*i] == 'p')
+		*ret = 3;
+	else if ((*format)[*i] == 'd' || (*format)[*i] == 'i')
+		*ret = 4;
+	else if ((*format)[*i] == 'u')
+		*ret = 5;
+	else if ((*format)[*i] == 'x')
+		*ret = 6;
+	else if ((*format)[*i] == 'X')
+		*ret = 7;
+	else if ((*format)[*i] == '%')
+		*ret = 8;
+}
+
 int	search_specifier(char **format)
 {
 	int	i;
@@ -52,24 +72,8 @@ int	search_specifier(char **format)
 	i = 0;
 	while ((*format)[i] != '\0')
 	{
-		if ((*format)[i] == 'c')
-			ret = 1;
-		else if ((*format)[i] == 's')
-			ret = 2;
-		else if ((*format)[i] == 'p')
-			ret = 3;
-		else if ((*format)[i] == 'd' || (*format)[i] == 'i')
-			ret = 4;
-		else if ((*format)[i] == 'u')
-			ret = 5;
-		else if ((*format)[i] == 'x')
-			ret = 6;
-		else if ((*format)[i] == 'X')
-			ret = 7;
-		else if ((*format)[i] == '%')
-			ret = 8;
-		else
-			i++;
+		search_specifier_bis(format, &ret, &i);
+		i++;
 		if (ret != 0)
 			break ;
 	}
