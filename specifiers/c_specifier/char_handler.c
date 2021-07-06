@@ -6,118 +6,51 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 19:32:49 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 23:40:53 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-static char	*add_zero(char *str, int width_prec, int len, int flag)
+static char	*char_width_handler(char *str, int width)
 {
 	int		i;
-	int		minus;
-	char	*new;
+	int		len;
 
-	if (str[0] == '-' && flag != 1)
-	{
-		if (width_prec < len)
-			return (str);
-	}
-	else if (width_prec <= len)
-		return (str);
-	minus = -1;
-	width_prec = width_prec - len;
+	len = ft_strlen(str);
 	i = 0;
-	if (str[i] == '-')
-	{
-		if (flag != 1)
-			width_prec = width_prec + 1;
-		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
-		new[i] = '-';
-		str++;
-		i++;
-	}
+	if (width > 0)
+		width = width - 1;
 	else
-		new = (char *)malloc(sizeof(char) * len + width_prec + 1);
-	while (width_prec != 0)
-	{
-		new[i] = '0';
-		i++;
-		width_prec--;
-	}
-	len = 0;
-	while (str[len] != '\0')
-	{
-		new[i] = str[len];
-		i++;
-		len++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-static int	insert_spaces(char *str, int width)
-{
-	int	i;
-
-	i = 0;
-	while (width != 0)
-	{
-		str[i] = ' ';
-		width--;
-		i++;
-	}
-	return (i);
-}
-
-static char	*add_space(char *str, int width, int len)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	if (*str == '\0')
-	{
-		if (width > 0)
-			width = width - 1;
-		else
-			width = width + 1;
-	}
+		width = width + 1;
 	if (width < 0)
 	{
 		width = (width * -1) - len;
-		if (width < 0)
-			return (str);
-		new = (char *)malloc(sizeof(char) + len + \
-				width + 1);
-		len = 0;
-		while (str[len] != '\0')
-		{
-			new[i] = str[len];
-			i++;
-			len++;
-		}
-		insert_spaces(new + i, width);
-		i = i + width ;
-		new[i] = '\0';
-		free(str);
-		return (new);
+		if (width > 0)
+			str = width_handler(str, width);
 	}
-	width = width - len;
-	if (width < 0)
-		return (str);
-	new = (char *)malloc(sizeof(char) + len + width + 1);
-	i = insert_spaces(new, width);
-	len = 0;
-	while (str[len] != '\0')
+	else if (width > 0)
 	{
-		new[i] = str[len];
-		i++;
-		len++;
+		width = width - len;
+		if (width > 0)
+			str = width_handler(str, width);
 	}
-	new[i] = '\0';
-	free(str);
-	return (new);
+	return (str);
+}
+static int count_skip_display(char **format, t_flag_attribs *flag, char *str, char c)
+{
+	int		len;
+	len = ft_strlen(str);
+
+	while (**format != 'c')
+		(*format)++;
+	if (flag->width > 0)
+		write(1, str, len);
+	write(1, &c, 1);
+	if (flag->width < 0)
+		write(1, str, len);
+	(*format)++;
+	return (len);
 }
 
 void	char_handler(char **format, va_list var, int *ptf_ret)
@@ -133,34 +66,15 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	str = ft_strdup("");
 	if (str == NULL)
 		return ;
-	*ptf_ret = *ptf_ret + 1;
 	if (flag->precision > 0)
-	{
-		len = ft_strlen(str);
-		str = add_zero(str, flag->precision, len, 0);
-	}
-	if (flag->padding > 0 && flag->precision == 0)
-	{
-		len = ft_strlen(str);
-		str = add_zero(str, flag->padding, len, 1);
-	}
+		str = padding_handler(str, flag->padding, flag->precision, \
+				flag->prec_is_dot);
 	else if (flag->padding > 0 && flag->precision != 0)
 		flag->width = flag->padding;
 	if (flag->width != 0)
-	{
-		len = ft_strlen(str);
-		str = add_space(str, flag->width, len);
-	}
-	while (**format != 'c')
-		(*format)++;
-	(*format)++;
-	len = ft_strlen(str);
-	*ptf_ret = *ptf_ret + len;
-	if (flag->width > 0)
-		write(1, str, len);
-	write(1, &c, 1);
-	if (flag->width < 0)
-		write(1, str, len);
+		str = char_width_handler(str, flag->width);
+	len = count_skip_display(format, flag, str, c);
+	*ptf_ret = *ptf_ret + len + 1;
 	free(str);
 	free(flag);
 }
