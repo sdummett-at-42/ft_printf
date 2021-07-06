@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 18:33:55 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:03:21 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	int				neg;
 	t_flag_attribs	*flag;
 
-	flag = struct_initializer();
+	flag = struct_init();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
@@ -292,9 +292,8 @@ static char	*check_str_is_eq_zero(char *str, int dot)
 	return (str);
 }
 
-void	u_integer_handler(char **format, va_list var, int *pft_ret)
+void	u_integer_handler(char **format, va_list var, int *ptf_ret)
 {
-	int				len;
 	char			*str;
 	t_flag_attribs	*flag;
 
@@ -310,12 +309,7 @@ void	u_integer_handler(char **format, va_list var, int *pft_ret)
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
 		str = padding_handler(str, flag->padding, \
 				flag->precision, flag->prec_is_dot);
-	while (**format != 'u')
-		(*format)++;
-	(*format)++;
-	len = ft_strlen(str);
-	write(1, str, len);
-	*pft_ret = *pft_ret + len;
+	count_and_display(format, str, 'u', ptf_ret);
 	free(flag);
 	free(str);
 }

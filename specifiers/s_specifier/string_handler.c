@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 19:38:31 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 13:50:47 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	int				neg;
 	t_flag_attribs	*flag;
 
-	flag = struct_initializer();
+	flag = struct_init();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
@@ -228,12 +228,7 @@ void	str_handler(char **format, va_list var, int *ptf_ret)
 		len = ft_strlen(str);
 		str = add_space(str, flag->width, len);
 	}
-	while (**format != 's')
-		(*format)++;
-	(*format)++;
-	len = ft_strlen(str);
-	*ptf_ret = *ptf_ret + len;
-	write(1, str, len);
+	count_and_display(format, str, 's', ptf_ret);
 	free(str);
 	free(flag);
 }

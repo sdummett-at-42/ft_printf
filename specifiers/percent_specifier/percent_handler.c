@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 19:40:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 13:59:42 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	int				neg;
 	t_flag_attribs	*flag;
 
-	flag = struct_initializer();
+	flag = struct_init();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
@@ -185,16 +185,6 @@ static char	*resize_str(char *str, int precision, int len)
 	return (new);
 }
 
-char	*create_percent(void)
-{
-	char	*new;
-
-	new = (char *)malloc(sizeof(char) * 2);
-	new[0] = '%';
-	new[1] = '\0';
-	return (new);
-}
-
 void	percent_handler(char **format, va_list var, int *ptf_ret)
 {
 	int				len;
@@ -203,7 +193,7 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 
 	len = 0;
 	flag = integer_parser(format, var);
-	str = create_percent();
+	str = ft_strdup("%");
 	if (flag->precision > 0 || flag->prec_is_dot == 1)
 	{
 		len = ft_strlen(str);
@@ -219,12 +209,7 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 		len = ft_strlen(str);
 		str = add_space(str, flag->width, len);
 	}
-	while (**format != '%')
-		(*format)++;
-	(*format)++;
-	len = ft_strlen(str);
-	*ptf_ret = *ptf_ret + len;
-	write(1, str, len);
+	count_and_display(format, str, '%', ptf_ret);
 	free(str);
 	free(flag);
 }

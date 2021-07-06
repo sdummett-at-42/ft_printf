@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   count_and_display.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 09:49:47 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 13:42:31 by sdummett         ###   ########.fr       */
+/*   Created: 2021/07/06 13:26:22 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/06 14:06:40 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.c"
 
-int	ft_printf(const char *format, ...)
+void count_and_display(char **format, char *str, char c, int *ptf_ret)
 {
-	int		len;
-	va_list	vars;
-
-	len = 0;
-	va_start(vars, format);
-	while (*format != '\0')
+	int len;
+	
+	if (c == 'd')
 	{
-		if (*format == '%')
-		{
-			format++;
-			call_handler(search_specifier((char **)&format), \
-					(char **)&format, vars, &len);
-		}
-		else
-		{
-			write(1, &(*format), 1);
-			len++;
-			format++;
-		}
+		while (**format != c && **format != 'i')
+			(*format)++;
 	}
-	va_end(vars);
-	return (len);
+	else
+	{
+		while (**format != c)
+			(*format)++;
+	}
+	(*format)++;
+	len = ft_strlen(str);
+	*ptf_ret = *ptf_ret + len;
+	write(1, str, len);
 }

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 18:32:49 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 13:34:08 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	int				neg;
 	t_flag_attribs	*flag;
 
-	flag = struct_initializer();
+	flag = struct_init();
 	i = 0;
 	neg = 1;
 	if ((*format)[i] == '0')
