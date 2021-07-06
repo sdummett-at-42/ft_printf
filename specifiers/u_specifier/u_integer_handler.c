@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:30:29 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:54:16 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_flag_attribs	*integer_parser(char **format, va_list var)
 	}
 	return (flag);
 }
-
+/*
 static char	*pos_prec_handler(char *str, int precision, int len)
 {
 	int		i;
@@ -278,7 +278,7 @@ static char	*padding_handler(char *str, int padding, int precision, int dot)
 	else
 		return (pos_pad_handler(str, padding, len));
 }
-
+*/
 void	u_integer_handler(char **format, va_list var, int *ptf_ret)
 {
 	char			*str;
