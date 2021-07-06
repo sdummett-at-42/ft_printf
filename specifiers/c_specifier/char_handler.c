@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 23:40:53 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 01:09:41 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,32 @@ static char	*char_width_handler(char *str, int width)
 	}
 	return (str);
 }
-static int count_skip_display(char **format, t_flag_attribs *flag, char *str, char c)
+
+static int	count_display(char **fmt, t_attribs *flag, char *str, char c)
 {
 	int		len;
-	len = ft_strlen(str);
 
-	while (**format != 'c')
-		(*format)++;
+	len = ft_strlen(str);
+	while (**fmt != 'c')
+		(*fmt)++;
 	if (flag->width > 0)
 		write(1, str, len);
 	write(1, &c, 1);
 	if (flag->width < 0)
 		write(1, str, len);
-	(*format)++;
+	(*fmt)++;
 	return (len);
 }
 
-void	char_handler(char **format, va_list var, int *ptf_ret)
+void	char_handler(char **fmt, va_list var, int *ptf_ret)
 {
-	t_flag_attribs	*flag;
-	char			*str;
-	char			c;
-	int				len;
+	t_attribs	*flag;
+	char		*str;
+	char		c;
+	int			len;
 
 	len = 0;
-	flag = format_parser(format, var);
+	flag = fmt_parser(fmt, var);
 	c = va_arg(var, unsigned int);
 	str = ft_strdup("");
 	if (str == NULL)
@@ -73,7 +74,7 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 		flag->width = flag->padding;
 	if (flag->width != 0)
 		str = char_width_handler(str, flag->width);
-	len = count_skip_display(format, flag, str, c);
+	len = count_display(fmt, flag, str, c);
 	*ptf_ret = *ptf_ret + len + 1;
 	free(str);
 	free(flag);

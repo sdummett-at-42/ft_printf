@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 22:50:37 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 01:09:49 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static char	*resize_str(char *str, int precision)
 	return (new);
 }
 
-void	str_handler(char **format, va_list var, int *ptf_ret)
+void	str_handler(char **fmt, va_list var, int *ptf_ret)
 {
-	t_flag_attribs	*flag;
-	char			*str;
-	int				len;
+	t_attribs	*flag;
+	char		*str;
+	int			len;
 
 	len = 0;
-	flag = format_parser(format, var);
+	flag = fmt_parser(fmt, var);
 	str = create_str(va_arg(var, char *));
 	if (flag->precision > 0 || flag->prec_is_dot == 1)
 		str = resize_str(str, flag->precision);
@@ -53,7 +53,7 @@ void	str_handler(char **format, va_list var, int *ptf_ret)
 		flag->width = flag->padding;
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
-	count_and_display(format, str, 's', ptf_ret);
+	count_and_display(fmt, str, 's', ptf_ret);
 	free(str);
 	free(flag);
 }

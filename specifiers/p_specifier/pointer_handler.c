@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/06 23:56:54 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 01:10:01 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static char	*create_address(unsigned long nb)
 	return (new);
 }
 
-void	pointer_handler(char **format, va_list var, int *ptf_ret)
+void	pointer_handler(char **fmt, va_list var, int *ptf_ret)
 {
-	t_flag_attribs	*flag;
-	char			*str;
-	int				len;
+	t_attribs	*flag;
+	char		*str;
+	int			len;
 
 	len = 0;
-	flag = format_parser(format, var);
+	flag = fmt_parser(fmt, var);
 	str = create_address(va_arg(var, unsigned long));
 	if (flag->precision > 0)
 		str = padding_handler(str, flag->padding, flag->precision, \
@@ -69,7 +69,7 @@ void	pointer_handler(char **format, va_list var, int *ptf_ret)
 		flag->width = flag->padding;
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
-	count_and_display(format, str, 'p', ptf_ret);
+	count_and_display(fmt, str, 'p', ptf_ret);
 	free(str);
 	free(flag);
 }

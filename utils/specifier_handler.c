@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 00:18:29 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 01:09:23 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,56 +23,56 @@
  *	8 : %%
  */
 
-void	call_handler(int handler_choice, char **format, va_list var, int *len)
+void	call_handler(int handler_choice, char **fmt, va_list var, int *len)
 {
 	if (handler_choice == 1)
-		char_handler(format, var, len);
+		char_handler(fmt, var, len);
 	else if (handler_choice == 2)
-		str_handler(format, var, len);
+		str_handler(fmt, var, len);
 	else if (handler_choice == 3)
-		pointer_handler(format, var, len);
+		pointer_handler(fmt, var, len);
 	else if (handler_choice == 4)
-		integer_handler(format, var, len);
+		integer_handler(fmt, var, len);
 	else if (handler_choice == 5)
-		u_integer_handler(format, var, len);
+		u_integer_handler(fmt, var, len);
 	else if (handler_choice == 6)
-		hexalow_handler(format, var, len);
+		hexalow_handler(fmt, var, len);
 	else if (handler_choice == 7)
-		hexaup_handler(format, var, len);
+		hexaup_handler(fmt, var, len);
 	else if (handler_choice == 8)
-		percent_handler(format, var, len);
+		percent_handler(fmt, var, len);
 }
 
-static void	search_specifier_bis(char **format, int *ret, int *i)
+static void	search_specifier_bis(char **fmt, int *ret, int *i)
 {
-	if ((*format)[*i] == 'c')
+	if ((*fmt)[*i] == 'c')
 		*ret = 1;
-	else if ((*format)[*i] == 's')
+	else if ((*fmt)[*i] == 's')
 		*ret = 2;
-	else if ((*format)[*i] == 'p')
+	else if ((*fmt)[*i] == 'p')
 		*ret = 3;
-	else if ((*format)[*i] == 'd' || (*format)[*i] == 'i')
+	else if ((*fmt)[*i] == 'd' || (*fmt)[*i] == 'i')
 		*ret = 4;
-	else if ((*format)[*i] == 'u')
+	else if ((*fmt)[*i] == 'u')
 		*ret = 5;
-	else if ((*format)[*i] == 'x')
+	else if ((*fmt)[*i] == 'x')
 		*ret = 6;
-	else if ((*format)[*i] == 'X')
+	else if ((*fmt)[*i] == 'X')
 		*ret = 7;
-	else if ((*format)[*i] == '%')
+	else if ((*fmt)[*i] == '%')
 		*ret = 8;
 }
 
-int	search_specifier(char **format)
+int	search_specifier(char **fmt)
 {
 	int	i;
 	int	ret;
 
 	ret = 0;
 	i = 0;
-	while ((*format)[i] != '\0')
+	while ((*fmt)[i] != '\0')
 	{
-		search_specifier_bis(format, &ret, &i);
+		search_specifier_bis(fmt, &ret, &i);
 		i++;
 		if (ret != 0)
 			break ;

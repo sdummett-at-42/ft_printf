@@ -6,16 +6,16 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 19:43:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 01:12:57 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
 
-static void	prec_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *i)
+static void	prec_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
-	int j;
-	
+	int	j;
+
 	j = *i;
 	j++;
 	if ((*fmt)[j] == '*')
@@ -31,9 +31,9 @@ static void	prec_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
-static void	width_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *i)
+static void	width_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
-	int j;
+	int	j;
 
 	j = *i;
 	if ((*fmt)[j] == '-')
@@ -60,9 +60,9 @@ static void	width_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
-static void	padding_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *i)
+static void	padding_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
-	int j;
+	int	j;
 
 	j = *i;
 	j++;
@@ -78,27 +78,20 @@ static void	padding_parsing(t_flag_attribs *flag, char **fmt, va_list var, int *
 	*i = j;
 }
 
-t_flag_attribs	*format_parser(char **fmt, va_list var)
+t_attribs	*fmt_parser(char **fmt, va_list var)
 {
-	int				i;
-	t_flag_attribs	*flag;
+	int			i;
+	t_attribs	*flag;
 
 	flag = struct_init();
 	i = 0;
 	flag->negative = 1;
 	if ((*fmt)[i] == '0')
-	{
 		padding_parsing(flag, fmt, var, &i);
-	}
 	if (((*fmt)[i] >= '1' && (*fmt)[i] <= '9') || \
 			(*fmt)[i] == '-' || (*fmt)[i] == '*')
-	{
-
 		width_parsing(flag, fmt, var, &i);
-	}
 	if ((*fmt)[i] == '.')
-	{
 		prec_parsing(flag, fmt, var, &i);
-	}
 	return (flag);
 }
