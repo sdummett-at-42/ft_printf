@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/06 13:40:24 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/06 14:32:57 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,9 @@ SRC		= specifiers/c_specifier/char_handler.c \
 		  utils/uitoa.c \
 		  utils/struct_init.c \
 		  utils/count_and_display.c \
+		  utils/uitohex_low.c \
+		  utils/uitohex_up.c \
+		  utils/check_if_eq_zero.c \
 		  ft_printf.c
 
 OBJ		= $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:01:19 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:30:18 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,19 +283,6 @@ static char	*padding_handler(char *str, int padding, int precision, int dot)
 		return (pos_pad_handler(str, padding, len));
 }
 
-static char	*check_str_is_eq_zero(char *str, int dot)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (len == 1 && str[0] == '0' && dot == 1)
-	{
-		free(str);
-		return (ft_strdup(""));
-	}
-	return (str);
-}
-
 void	integer_handler(char **format, va_list var, int *ptf_ret)
 {
 	char			*str;
@@ -305,7 +292,7 @@ void	integer_handler(char **format, va_list var, int *ptf_ret)
 	if (flag->prec_is_dot == 0 && flag->padding < 0)
 		flag->width = flag->padding;
 	str = ft_itoa(va_arg(var, int));
-	str = check_str_is_eq_zero(str, flag->prec_is_dot);
+	str = check_if_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
 	if (flag->width != 0)

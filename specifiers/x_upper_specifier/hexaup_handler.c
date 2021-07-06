@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:04:11 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:30:45 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,55 +282,6 @@ static char	*padding_handler(char *str, int padding, int precision, int dot)
 		return (pos_pad_handler(str, padding, len));
 }
 
-static char	*check_str_is_eq_zero(char *str, int dot)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (len == 1 && str[0] == '0' && dot == 1)
-	{
-		free(str);
-		return (ft_strdup(""));
-	}
-	return (str);
-}
-
-static int	len_str(unsigned long nb)
-{
-	int	len;
-
-	if (nb == 0)
-		return (1);
-	len = 0;
-	while (nb)
-	{
-		nb = nb / 16;
-		len++;
-	}
-	return (len);
-}
-
-static char	*uitohexup(unsigned long nb)
-{
-	char	*str;
-	char	*hexbase;
-	int		len;
-
-	hexbase = "0123456789ABCDEF";
-	len = len_str(nb);
-	str = (char *)malloc(sizeof(char) * len + 1);
-	if (nb == 0)
-		str[0] = '0';
-	str[len] = 0;
-	while (nb)
-	{
-		str[len - 1] = *(hexbase + nb % 16);
-		nb = nb / 16;
-		len--;
-	}
-	return (str);
-}
-
 void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 {
 	char			*str;
@@ -339,8 +290,8 @@ void	hexaup_handler(char **format, va_list var, int *ptf_ret)
 	flag = integer_parser(format, var);
 	if (flag->prec_is_dot == 0 && flag->padding < 0)
 		flag->width = flag->padding;
-	str = uitohexup(va_arg(var, unsigned int));
-	str = check_str_is_eq_zero(str, flag->prec_is_dot);
+	str = uitohex_up(va_arg(var, unsigned int));
+	str = check_if_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
 	if (flag->width != 0)

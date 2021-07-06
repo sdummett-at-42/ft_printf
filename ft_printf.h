@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 13:31:03 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:31:58 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	hexaup_handler(char **format, va_list var, int *ptf_ret);
 char	*ft_uitoa(unsigned int n);
 t_flag_attribs	*struct_init(void);
 void count_and_display(char **format, char *str, char c, int *ptf_ret);
+char	*uitohex_low(unsigned long nb);
+char	*uitohex_up(unsigned long nb);
+char	*check_if_eq_zero(char *str, int dot);
 
 //////////////////////////// 
 
