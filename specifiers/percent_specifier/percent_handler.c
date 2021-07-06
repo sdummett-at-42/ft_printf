@@ -6,64 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 13:59:42 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:33:36 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
-
-static t_flag_attribs	*integer_parser(char **format, va_list var)
-{
-	int				i;
-	int				neg;
-	t_flag_attribs	*flag;
-
-	flag = struct_init();
-	i = 0;
-	neg = 1;
-	if ((*format)[i] == '0')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->padding = va_arg(var, int);
-		else
-			flag->padding = ft_atoi(&(*format)[i]);
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
-			(*format)[i] == '-' || (*format)[i] == '*')
-	{
-		if ((*format)[i] == '-')
-		{
-			neg = -1;
-			i++;
-		}
-		if ((*format)[i] == '*')
-		{
-			flag->width = va_arg(var, int) * neg;
-			i++;
-		}
-		else
-			flag->width = ft_atoi(&(*format)[i]) * neg;
-		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
-				(*format)[i] == '-')
-			i++;
-	}
-	if ((*format)[i] == '.')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->precision = va_arg(var, int);
-		else
-			flag->precision = ft_atoi(&(*format)[i]);
-		if (flag->precision == 0)
-			flag->prec_is_dot = 1;
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	return (flag);
-}
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
@@ -192,7 +139,7 @@ void	percent_handler(char **format, va_list var, int *ptf_ret)
 	t_flag_attribs	*flag;
 
 	len = 0;
-	flag = integer_parser(format, var);
+	flag = format_parser(format, var);
 	str = ft_strdup("%");
 	if (flag->precision > 0 || flag->prec_is_dot == 1)
 	{

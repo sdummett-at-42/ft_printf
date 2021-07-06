@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 18:27:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/05 23:20:16 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 18:17:12 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_flag_attribs	*struct_init(void)
 	new->prec_is_dot = 0;
 	new->width = 0;
 	new->padding = 0;
+	new->negative = 1;
 	return (new);
 }

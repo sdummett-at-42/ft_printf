@@ -6,64 +6,11 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 13:34:08 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:32:49 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_printf.h"
-
-static t_flag_attribs	*integer_parser(char **format, va_list var)
-{
-	int				i;
-	int				neg;
-	t_flag_attribs	*flag;
-
-	flag = struct_init();
-	i = 0;
-	neg = 1;
-	if ((*format)[i] == '0')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->padding = va_arg(var, int);
-		else
-			flag->padding = ft_atoi(&(*format)[i]);
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
-			(*format)[i] == '-' || (*format)[i] == '*')
-	{
-		if ((*format)[i] == '-')
-		{
-			neg = -1;
-			i++;
-		}
-		if ((*format)[i] == '*')
-		{
-			flag->width = va_arg(var, int);
-			i++;
-		}
-		else
-			flag->width = ft_atoi(&(*format)[i]);
-		if (flag->width > 0)
-			flag->width = flag->width * neg;
-		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
-				(*format)[i] == '-')
-			i++;
-	}
-	if ((*format)[i] == '.')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->precision = va_arg(var, int);
-		else
-			flag->precision = ft_atoi(&(*format)[i]);
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	return (flag);
-}
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
 {
@@ -181,7 +128,7 @@ void	char_handler(char **format, va_list var, int *ptf_ret)
 	int				len;
 
 	len = 0;
-	flag = integer_parser(format, var);
+	flag = format_parser(format, var);
 	c = va_arg(var, unsigned int);
 	str = ft_strdup("");
 	if (str == NULL)

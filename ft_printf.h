@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:52:56 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:35:20 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_flag_attribs
 	int prec_is_dot;
 	int width;
 	int padding;
+	int negative;
 }		t_flag_attribs;
 
 int        ft_printf(const char *format, ...)
@@ -53,7 +54,6 @@ void	u_integer_handler(char **format, va_list var, int *ptf_ret);
 void	hexalow_handler(char **format, va_list var, int *ptf_ret);
 void	hexaup_handler(char **format, va_list var, int *ptf_ret);
 char	*ft_uitoa(unsigned int n);
-t_flag_attribs	*struct_init(void);
 void count_and_display(char **format, char *str, char c, int *ptf_ret);
 char	*uitohex_low(unsigned long nb);
 char	*uitohex_up(unsigned long nb);
@@ -61,6 +61,9 @@ char	*check_if_eq_zero(char *str, int dot);
 char	*precision_handler(char *str, int precision);
 char	*width_handler(char *str, int width);
 char	*padding_handler(char *str, int padding, int precision, int dot);
+void	integer_handler(char **format, va_list var, int *ptf_ret);
+t_flag_attribs	*struct_init(void);
+t_flag_attribs	*format_parser(char **format, va_list);
 
 //////////////////////////// 
 

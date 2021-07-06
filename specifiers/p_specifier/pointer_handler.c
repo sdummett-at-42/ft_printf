@@ -6,7 +6,7 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/06 13:51:14 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:33:23 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,59 +48,6 @@ static char	*uitohexlow_addr(unsigned long nb)
 		len--;
 	}
 	return (str);
-}
-
-static t_flag_attribs	*integer_parser(char **format, va_list var)
-{
-	int				i;
-	int				neg;
-	t_flag_attribs	*flag;
-
-	flag = struct_init();
-	i = 0;
-	neg = 1;
-	if ((*format)[i] == '0')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->padding = va_arg(var, int);
-		else
-			flag->padding = ft_atoi(&(*format)[i]);
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	if (((*format)[i] >= '1' && (*format)[i] <= '9') || \
-			(*format)[i] == '-' || (*format)[i] == '*')
-	{
-		if ((*format)[i] == '-')
-		{
-			neg = -1;
-			i++;
-		}
-		if ((*format)[i] == '*')
-		{
-			flag->width = va_arg(var, int) * neg;
-			i++;
-		}
-		else
-			flag->width = ft_atoi(&(*format)[i]);
-		if (flag->width > 0 && neg == -1)
-			flag->width = flag->width * -1;
-		while (((*format)[i] >= '0' && (*format)[i] <= '9') || \
-				(*format)[i] == '-')
-			i++;
-	}
-	if ((*format)[i] == '.')
-	{
-		i++;
-		if ((*format)[i] == '*')
-			flag->precision = va_arg(var, int);
-		else
-			flag->precision = ft_atoi(&(*format)[i]);
-		while ((*format)[i] >= '0' && (*format)[i] <= '9')
-			i++;
-	}
-	return (flag);
 }
 
 static char	*add_zero(char *str, int width_prec, int len, int flag)
@@ -213,7 +160,7 @@ void	pointer_handler(char **format, va_list var, int *ptf_ret)
 	int				len;
 
 	len = 0;
-	flag = integer_parser(format, var);
+	flag = format_parser(format, var);
 	str = uitohexlow_addr(va_arg(var, unsigned long));
 	if (flag->precision > 0)
 	{
