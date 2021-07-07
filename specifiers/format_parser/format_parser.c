@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:12:57 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:08:32 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 	flag = struct_init();
 	i = 0;
 	flag->negative = 1;
+	if ((*fmt)[i] == '#')
+	{
+		flag->prefix = 1;
+		while ((*fmt)[i] == '#')
+			i++;
+	}
 	if ((*fmt)[i] == '0')
 		padding_parsing(flag, fmt, var, &i);
 	if (((*fmt)[i] >= '1' && (*fmt)[i] <= '9') || \

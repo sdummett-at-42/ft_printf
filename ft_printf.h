@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:11:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:13:09 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@
 /*
  * -> Checker les printfs (grep) et return (-1) en cas de malloc failed.
 */
-
+//////////////////////
+	#include <stdio.h>
+//////////////////
 typedef struct s_attribs
 {
 	int	precision;
 	int	prec_is_dot;
 	int	width;
 	int	padding;
+	int	prefix;
 	int	negative;
 }		t_attribs;
 
@@ -53,5 +56,6 @@ char	*padding_handler(char *str, int padding, int precision, int dot);
 void	integer_handler(char **fmt, va_list var, int *ptf_ret);
 t_attribs	*struct_init(void);
 t_attribs	*fmt_parser(char **fmt, va_list var);
+char	*prefix_handler(char *str, char spec);
 
 #endif

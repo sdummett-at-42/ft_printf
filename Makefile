@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/06 19:41:24 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/07 14:10:08 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		= specifiers/c_specifier/char_handler.c \
 		  utils/width_handler.c \
 		  utils/padding_handler.c \
 		  specifiers/format_parser/format_parser.c \
+		  utils/prefix_handler.c \
 		  ft_printf.c
 
 OBJ		= $(SRC:.c=.o)
@@ -52,6 +53,8 @@ $(NAME): $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+bonus: all
 
 clean:
 	rm -rf $(OBJ)

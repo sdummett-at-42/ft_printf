@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_init.c                                      :+:      :+:    :+:   */
+/*   prefix_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/05 18:27:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 13:24:30 by sdummett         ###   ########.fr       */
+/*   Created: 2021/07/07 14:08:43 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/07 14:14:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-t_attribs	*struct_init(void)
+char	*prefix_handler(char *str, char spec)
 {
-	t_attribs	*new;
+	int		i;
+	int		len;
+	char	*new;
 
-	new = (t_attribs *)malloc(sizeof(t_attribs) * 1);
-	new->precision = 0;
-	new->prec_is_dot = 0;
-	new->width = 0;
-	new->padding = 0;
-	new->prefix = 0;
-	new->negative = 1;
+	len = ft_strlen(str) + 2;
+	i = 0;
+	while (str[i] == '0' && str[i] != '\0')
+		i++;
+	if (len - 2 == 0 || i == len - 2)
+		return (str);
+	new = malloc(sizeof(char) * len + 1);
+	new[0] = '0';
+	new[1] = spec;
+	i = 2;
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[i] = str[len];
+		len++;
+		i++;
+	}
+	new[i] = '\0';
+	free(str);
 	return (new);
 }
