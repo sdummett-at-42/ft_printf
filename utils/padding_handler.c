@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:44:37 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 00:39:27 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 00:47:05 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*neg_pos_pad_handler(char *str, int padding, int len)
 	else if (*str == '+')
 		new[0] = '+';
 	else if (*str == ' ')
-		new[0] =  ' ';
+		new[0] = ' ';
 	padding = padding - len;
 	i = insert_padding(new, padding, 1);
 	copy_str(new, str, i, 1);
@@ -81,7 +81,7 @@ static char	*sharp_hexa_pad(char *str, int padding, int len)
 
 	if (padding <= len)
 		return (str);
-	new = malloc(sizeof(char) * padding  + 1);
+	new = malloc(sizeof(char) * padding + 1);
 	if (new == NULL)
 		return (NULL);
 	i = 0;
@@ -90,7 +90,7 @@ static char	*sharp_hexa_pad(char *str, int padding, int len)
 		new[i] = str[i];
 		i++;
 	}
-		padding = padding - len;
+	padding = padding - len;
 	while (padding != 0)
 	{
 		new[i] = '0';
@@ -104,7 +104,7 @@ static char	*sharp_hexa_pad(char *str, int padding, int len)
 		len++;
 		i++;
 	}
-	new[i] =  '\0';
+	new[i] = '\0';
 	free(str);
 	return (new);
 }
@@ -119,7 +119,7 @@ char	*padding_handler(char *str, int padding, int precision, int dot)
 	else if (str[0] == '-' || str[0] == '+' || str[0] == ' ')
 		return (neg_pos_pad_handler(str, padding, len));
 	else if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
-		return (sharp_hexa_pad(str, padding , len));
+		return (sharp_hexa_pad(str, padding, len));
 	else
 		return (pos_pad_handler(str, padding, len));
 }

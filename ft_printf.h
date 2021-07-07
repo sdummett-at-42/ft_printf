@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 14:55:23 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:04:56 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 /*
  * -> Checker les printfs (grep) et return (-1) en cas de malloc failed.
 */
-//////////////////////
-	#include <stdio.h>
-//////////////////
+
 typedef struct s_attribs
 {
 	int	precision;

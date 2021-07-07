@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 00:39:41 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 00:54:00 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 	t_attribs	*flag;
 
 	flag = struct_init();
-
 	i = 0;
 	flag->negative = 1;
 	if ((*fmt)[i] == ' ')
@@ -97,7 +96,7 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 	{
 		flag->pos_prefix = 1;
 		flag->blank = 0;
-		while ((*fmt)[i] == '+' || (*fmt)[i] == ' ') // <=== modif blank flag
+		while ((*fmt)[i] == '+' || (*fmt)[i] == ' ')
 			i++;
 	}
 	if ((*fmt)[i] == '#')
@@ -112,7 +111,7 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 	{
 		flag->pos_prefix = 1;
 		flag->blank = 0;
-		while ((*fmt)[i] == '+' || (*fmt)[i] == ' ') // <=== modif blank flag
+		while ((*fmt)[i] == '+' || (*fmt)[i] == ' ')
 			i++;
 	}
 	if (((*fmt)[i] >= '1' && (*fmt)[i] <= '9') || \

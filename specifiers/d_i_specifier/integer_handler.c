@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 23:44:49 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 01:04:34 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	*pos_prefix_handler(char *str)
 {
-	int	i;
-	int	len;
-	char 	*new;
+	int		i;
+	int		len;
+	char	*new;
 
 	if (*str == '-')
 		return (str);
@@ -40,9 +40,9 @@ static char	*pos_prefix_handler(char *str)
 
 static char	*blank_handler(char *str)
 {
-	int	i;
-	int	len;
-	char 	*new;
+	int		i;
+	int		len;
+	char	*new;
 
 	if (*str == '-')
 		return (str);
@@ -62,7 +62,6 @@ static char	*blank_handler(char *str)
 	new[i] = '\0';
 	free(str);
 	return (new);
-
 }
 
 void	integer_handler(char **fmt, va_list var, int *ptf_ret)
