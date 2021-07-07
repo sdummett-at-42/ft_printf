@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 18:27:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 13:24:30 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:42:04 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_attribs	*struct_init(void)
 	new->width = 0;
 	new->padding = 0;
 	new->prefix = 0;
+	new->pos_prefix = 0;
 	new->negative = 1;
 	return (new);
 }
