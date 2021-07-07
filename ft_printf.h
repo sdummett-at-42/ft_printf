@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 14:27:14 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:55:23 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_attribs
 	int	padding;
 	int	prefix;
 	int	pos_prefix;
+	int	blank;
 	int	negative;
 }		t_attribs;
 

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 14:42:20 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:58:46 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,33 @@ static char	*pos_prefix_handler(char *str)
 	return (new);
 }
 
+static char	*blank_handler(char *str)
+{
+	int	i;
+	int	len;
+	char 	*new;
+
+	if (*str == '-')
+		return (str);
+	len = ft_strlen(str) + 1;
+	new = (char *)malloc(sizeof(char) * len + 1);
+	if (new == NULL)
+		return (NULL);
+	new[0] = ' ';
+	i = 1;
+	len = 0;
+	while (str[len] != '\0')
+	{
+		new[i] = str[len];
+		len++;
+		i++;
+	}
+	new[i] = '\0';
+	free(str);
+	return (new);
+
+}
+
 void	integer_handler(char **fmt, va_list var, int *ptf_ret)
 {
 	char		*str;
@@ -51,7 +78,11 @@ void	integer_handler(char **fmt, va_list var, int *ptf_ret)
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
 	if (flag->pos_prefix == 1)
-	str = pos_prefix_handler(str);
+		str = pos_prefix_handler(str);
+	if (flag->blank == 1)
+	{
+		str = blank_handler(str);
+	}
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
