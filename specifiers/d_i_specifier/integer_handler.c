@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 14:58:46 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/07 23:44:49 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,10 @@ void	integer_handler(char **fmt, va_list var, int *ptf_ret)
 	str = check_if_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
+	if (flag->blank == 1)
+		str = blank_handler(str);
 	if (flag->pos_prefix == 1)
 		str = pos_prefix_handler(str);
-	if (flag->blank == 1)
-	{
-		str = blank_handler(str);
-	}
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
