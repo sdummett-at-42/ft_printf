@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:44:37 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:29:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:49:30 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*pos_pad_handler(char *str, int padding, int len)
 	return (new);
 }
 
-static char	*neg_pos_pad_handler(char *str, int padding, int len)
+static char	*neg_or_flag_conversion(char *str, int padding, int len)
 {
 	int		i;
 	char	*new;
@@ -82,7 +82,7 @@ char	*padding_conversion(char *str, int padding, int precision, int dot)
 	if (precision > 0 || dot == 1)
 		return (width_conversion(str, padding));
 	else if (str[0] == '-' || str[0] == '+' || str[0] == ' ')
-		return (neg_pos_pad_handler(str, padding, len)); //func special flag 
+		return (neg_or_flag_conversion(str, padding, len));
 	else if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
 		return (x_prefix_pad_conversion(str, padding, len));
 	else

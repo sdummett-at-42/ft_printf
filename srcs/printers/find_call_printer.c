@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:39:36 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 23:04:09 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,32 @@
  *	6 : %x
  *	7 : %X
  *	8 : %%
- */
+*/
 
-void	call_handler(int handler_choice, char **fmt, va_list var, int *len)
+void	call_printer(int printer_choice, char **fmt, va_list var, int *len)
 {
-	if (handler_choice == 1)
+	if (printer_choice == 1)
 		c_printer(fmt, var, len);
-	else if (handler_choice == 2)
+	else if (printer_choice == 2)
 		s_printer(fmt, var, len);
-	else if (handler_choice == 3)
+	else if (printer_choice == 3)
 		p_printer(fmt, var, len);
-	else if (handler_choice == 4)
+	else if (printer_choice == 4)
 		d_i_printer(fmt, var, len);
-	else if (handler_choice == 5)
+	else if (printer_choice == 5)
 		u_printer(fmt, var, len);
-	else if (handler_choice == 6)
+	else if (printer_choice == 6)
 		lower_x_printer(fmt, var, len);
-	else if (handler_choice == 7)
+	else if (printer_choice == 7)
 		upper_x_printer(fmt, var, len);
-	else if (handler_choice == 8)
+	else if (printer_choice == 8)
 		percent_printer(fmt, var, len);
 }
+
+/*
+ *	search_specifier : search for a specifier and return an index associated
+ *	with it.
+*/
 
 static void	search_specifier_bis(char **fmt, int *ret, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:27:21 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:59:48 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		blank_parsing(t_attribs *flag, char **fmt, int *i);
 void		plus_parsing(t_attribs *flag, char **fmt, int *i);
 int			check_specifier(char **fmt, va_list var);
 int			search_specifier(char **fmt);
-void		call_handler(int handler_choice, char **fmt, va_list var, \
+void		call_printer(int handler_choice, char **fmt, va_list var, \
 		int *ptf_ret);
 
 /*
