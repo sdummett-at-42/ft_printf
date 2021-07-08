@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_handler.c                                     :+:      :+:    :+:   */
+/*   c_specifier.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:09:41 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:34:59 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
 static char	*char_width_handler(char *str, int width)
 {
@@ -54,7 +54,7 @@ static int	count_display(char **fmt, t_attribs *flag, char *str, char c)
 	return (len);
 }
 
-void	char_handler(char **fmt, va_list var, int *ptf_ret)
+void	c_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	t_attribs	*flag;
 	char		*str;

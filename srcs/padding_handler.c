@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:44:37 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 00:47:05 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 17:51:40 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,41 +70,6 @@ static char	*neg_pos_pad_handler(char *str, int padding, int len)
 	padding = padding - len;
 	i = insert_padding(new, padding, 1);
 	copy_str(new, str, i, 1);
-	free(str);
-	return (new);
-}
-
-static char	*sharp_hexa_pad(char *str, int padding, int len)
-{
-	int		i;
-	char	*new;
-
-	if (padding <= len)
-		return (str);
-	new = malloc(sizeof(char) * padding + 1);
-	if (new == NULL)
-		return (NULL);
-	i = 0;
-	while (i < 2)
-	{
-		new[i] = str[i];
-		i++;
-	}
-	padding = padding - len;
-	while (padding != 0)
-	{
-		new[i] = '0';
-		i++;
-		padding--;
-	}
-	len = 2;
-	while (str[len] != '\0')
-	{
-		new[i] = str[len];
-		len++;
-		i++;
-	}
-	new[i] = '\0';
 	free(str);
 	return (new);
 }

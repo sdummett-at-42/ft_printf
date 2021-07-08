@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   percent_handler.c                                  :+:      :+:    :+:   */
+/*   lower_x_specifier.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:10:50 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/08 18:35:32 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
-void	percent_handler(char **fmt, va_list var, int *ptf_ret)
+void	lower_x_printer(char **fmt, va_list var, int *ptf_ret)
 {
-	int			len;
 	char		*str;
 	t_attribs	*flag;
 
-	len = 0;
 	flag = fmt_parser(fmt, var);
-	str = ft_strdup("%");
-	if (flag->precision > 0 || flag->prec_is_dot == 1)
+	if (flag->prec_is_dot == 0 && flag->padding < 0)
+		flag->width = flag->padding;
+	str = uitohex_low(va_arg(var, unsigned int));
+	str = check_if_eq_zero(str, flag->prec_is_dot);
+	if (flag->precision > 0)
 		str = precision_handler(str, flag->precision);
-	if (flag->padding > 0)
-		str = padding_handler(str, flag->padding, flag->precision, \
-				flag->prec_is_dot);
+	if (flag->prefix == 1)
+		str = prefix_handler(str, 'x');
 	if (flag->width != 0)
 		str = width_handler(str, flag->width);
-	count_and_display(fmt, str, '%', ptf_ret);
-	free(str);
+	if (flag->padding > 0 || flag->prec_is_dot == 1)
+		str = padding_handler(str, flag->padding, \
+				flag->precision, flag->prec_is_dot);
+	count_and_display(fmt, str, 'x', ptf_ret);
 	free(flag);
+	free(str);
 }

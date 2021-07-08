@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_handler.c                                   :+:      :+:    :+:   */
+/*   s_specifier.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:09:49 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:36:15 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
 static char	*create_str(char *str)
 {
@@ -38,7 +38,7 @@ static char	*resize_str(char *str, int precision)
 	return (new);
 }
 
-void	str_handler(char **fmt, va_list var, int *ptf_ret)
+void	s_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	t_attribs	*flag;
 	char		*str;

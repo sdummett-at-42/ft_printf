@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pointer_handler.c                                  :+:      :+:    :+:   */
+/*   p_specifier.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/07 01:10:01 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:36:01 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
 static int	sizeof_new(unsigned long nb)
 {
@@ -50,7 +50,7 @@ static char	*create_address(unsigned long nb)
 	return (new);
 }
 
-void	pointer_handler(char **fmt, va_list var, int *ptf_ret)
+void	p_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	t_attribs	*flag;
 	char		*str;

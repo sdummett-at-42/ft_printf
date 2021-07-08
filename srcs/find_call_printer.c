@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   specifier_handler.c                                :+:      :+:    :+:   */
+/*   find_call_printer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 23:10:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:09:23 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:39:36 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@
 void	call_handler(int handler_choice, char **fmt, va_list var, int *len)
 {
 	if (handler_choice == 1)
-		char_handler(fmt, var, len);
+		c_printer(fmt, var, len);
 	else if (handler_choice == 2)
-		str_handler(fmt, var, len);
+		s_printer(fmt, var, len);
 	else if (handler_choice == 3)
-		pointer_handler(fmt, var, len);
+		p_printer(fmt, var, len);
 	else if (handler_choice == 4)
-		integer_handler(fmt, var, len);
+		d_i_printer(fmt, var, len);
 	else if (handler_choice == 5)
-		u_integer_handler(fmt, var, len);
+		u_printer(fmt, var, len);
 	else if (handler_choice == 6)
-		hexalow_handler(fmt, var, len);
+		lower_x_printer(fmt, var, len);
 	else if (handler_choice == 7)
-		hexaup_handler(fmt, var, len);
+		upper_x_printer(fmt, var, len);
 	else if (handler_choice == 8)
-		percent_handler(fmt, var, len);
+		percent_printer(fmt, var, len);
 }
 
 static void	search_specifier_bis(char **fmt, int *ret, int *i)

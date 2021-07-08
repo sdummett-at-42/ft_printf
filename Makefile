@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/07 14:10:08 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/08 18:48:17 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,26 +16,28 @@ ARFLAGS = rcs
 CFLAGS	= -Wall -Werror -Wextra -c
 NAME	= libftprintf.a
 
-SRC		= specifiers/c_specifier/char_handler.c \
-		  specifiers/s_specifier/string_handler.c \
-		  specifiers/p_specifier/pointer_handler.c \
-		  specifiers/d_i_specifier/integer_handler.c \
-		  specifiers/u_specifier/u_integer_handler.c \
-		  specifiers/x_lower_specifier/hexalow_handler.c \
-		  specifiers/x_upper_specifier/hexaup_handler.c \
-		  specifiers/percent_specifier/percent_handler.c \
-		  utils/specifier_handler.c \
-		  utils/uitoa.c \
-		  utils/struct_init.c \
-		  utils/count_and_display.c \
-		  utils/uitohex_low.c \
-		  utils/uitohex_up.c \
-		  utils/check_if_eq_zero.c \
-		  utils/precision_handler.c \
-		  utils/width_handler.c \
-		  utils/padding_handler.c \
-		  specifiers/format_parser/format_parser.c \
-		  utils/prefix_handler.c \
+SRC		= srcs/c_specifier.c \
+		  srcs/s_specifier.c \
+		  srcs/p_specifier.c \
+		  srcs/d_i_specifier.c \
+		  srcs/u_specifier.c \
+		  srcs/lower_x_specifier.c \
+		  srcs/upper_x_specifier.c \
+		  srcs/percent_specifier.c \
+		  srcs/format_parser.c \
+		  srcs/find_call_printer.c \
+		  srcs/uitoa.c \
+		  srcs/struct_init.c \
+		  srcs/count_and_display.c \
+		  srcs/uitohex_low.c \
+		  srcs/uitohex_up.c \
+		  srcs/check_if_eq_zero.c \
+		  srcs/precision_handler.c \
+		  srcs/width_handler.c \
+		  srcs/padding_handler.c \
+		  srcs/prefix_handler.c \
+		  srcs/parsing_funcs.c \
+		  srcs/sharp_padding.c \
 		  ft_printf.c
 
 OBJ		= $(SRC:.c=.o)

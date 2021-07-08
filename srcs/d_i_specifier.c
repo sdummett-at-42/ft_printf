@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integer_handler.c                                  :+:      :+:    :+:   */
+/*   d_i_specifier.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 01:04:34 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:35:09 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
 static char	*pos_prefix_handler(char *str)
 {
@@ -64,7 +64,7 @@ static char	*blank_handler(char *str)
 	return (new);
 }
 
-void	integer_handler(char **fmt, va_list var, int *ptf_ret)
+void	d_i_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	char		*str;
 	t_attribs	*flag;

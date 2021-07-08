@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_integer_handler.c                                :+:      :+:    :+:   */
+/*   u_specifier.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 01:10:19 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:36:44 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
-void	u_integer_handler(char **fmt, va_list var, int *ptf_ret)
+void	u_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	char		*str;
 	t_attribs	*flag;

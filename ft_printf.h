@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 01:17:13 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 18:32:27 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,19 @@ int			ft_printf(const char *fmt, ...)
 			__attribute__((format (printf, 1, 2)));
 int			check_specifier(char **fmt, va_list var);
 int			search_specifier(char **fmt);
+
 void		call_handler(int handler_choice, char **fmt, va_list var, \
 		int *ptf_ret);
-void		percent_handler(char **fmt, va_list var, int *ptf_ret);
-void		char_handler(char **fmt, va_list var, int *ptf_ret);
-void		str_handler(char **fmt, va_list var, int *ptf_ret);
-void		pointer_handler(char **fmt, va_list var, int *ptf_ret);
-void		integer_handler(char **fmt, va_list var, int *ptf_ret);
-void		u_integer_handler(char **fmt, va_list var, int *ptf_ret);
-void		hexalow_handler(char **fmt, va_list var, int *ptf_ret);
-void		hexaup_handler(char **fmt, va_list var, int *ptf_ret);
+
+void		percent_printer(char **fmt, va_list var, int *ptf_ret);
+void		c_printer(char **fmt, va_list var, int *ptf_ret);
+void		s_printer(char **fmt, va_list var, int *ptf_ret);
+void		p_printer(char **fmt, va_list var, int *ptf_ret);
+void		d_i_printer(char **fmt, va_list var, int *ptf_ret);
+void		u_printer(char **fmt, va_list var, int *ptf_ret);
+void		lower_x_printer(char **fmt, va_list var, int *ptf_ret);
+void		upper_x_printer(char **fmt, va_list var, int *ptf_ret);
+
 char		*ft_uitoa(unsigned int n);
 void		count_and_display(char **fmt, char *str, char c, int *ptf_ret);
 char		*uitohex_low(unsigned long nb);
@@ -58,5 +61,11 @@ void		integer_handler(char **fmt, va_list var, int *ptf_ret);
 t_attribs	*struct_init(void);
 t_attribs	*fmt_parser(char **fmt, va_list var);
 char		*prefix_handler(char *str, char spec);
+char		*sharp_hexa_pad(char *str, int padding, int len);
+void		prec_parsing(t_attribs *flag, char **fmt, va_list var, int *i);
+void		padding_parsing(t_attribs *flag, char **fmt, va_list var, int *i);
+void		pos_prefix_parsing(t_attribs *flag, char **fmt, int *i);
+void		prefix_parsing(t_attribs *flag, char **fmt, int *i);
+void		blank_parsing(t_attribs *flag, char **fmt, int *i);
 
 #endif
