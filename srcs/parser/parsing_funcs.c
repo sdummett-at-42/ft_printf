@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_funcs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:02:38 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:43:12 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	prec_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
+void	dot_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
 	int	j;
 
 	j = *i;
 	j++;
 	if ((*fmt)[j] == '*')
-	{	
 		flag->precision = va_arg(var, int);
-	}
 	else if ((*fmt)[j] >= '0' && (*fmt)[j] <= '9')
 		flag->precision = ft_atoi(&(*fmt)[j]);
 	if (flag->precision == 0)
@@ -31,7 +29,7 @@ void	prec_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
-void	padding_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
+void	zero_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
 	int	j;
 
@@ -49,7 +47,7 @@ void	padding_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
-void	pos_prefix_parsing(t_attribs *flag, char **fmt, int *i)
+void	plus_parsing(t_attribs *flag, char **fmt, int *i)
 {
 	int	j;
 
@@ -61,7 +59,7 @@ void	pos_prefix_parsing(t_attribs *flag, char **fmt, int *i)
 	*i = j;
 }
 
-void	prefix_parsing(t_attribs *flag, char **fmt, int *i)
+void	sharp_parsing(t_attribs *flag, char **fmt, int *i)
 {
 	int	j;
 

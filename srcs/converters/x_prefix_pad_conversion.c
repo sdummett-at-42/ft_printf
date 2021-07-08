@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 17:49:25 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 17:51:12 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:08:35 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	sharp_insert_zero(char *new, int padding)
 	return (i);
 }
 
-char	*sharp_hexa_pad(char *str, int padding, int len)
+char	*x_prefix_pad_conversion(char *str, int padding, int len)
 {
 	int		i;
 	char	*new;

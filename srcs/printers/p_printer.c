@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_specifier.c                                      :+:      :+:    :+:   */
+/*   p_printer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/08 18:36:01 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:35:27 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ void	p_printer(char **fmt, va_list var, int *ptf_ret)
 	flag = fmt_parser(fmt, var);
 	str = create_address(va_arg(var, unsigned long));
 	if (flag->precision > 0)
-		str = padding_handler(str, flag->padding, flag->precision, \
+		str = padding_conversion(str, flag->padding, flag->precision, \
 				flag->prec_is_dot);
 	if (flag->padding > 0 && flag->precision == 0)
-		str = padding_handler(str, flag->padding, flag->precision, \
+		str = padding_conversion(str, flag->padding, flag->precision, \
 				flag->prec_is_dot);
 	else if (flag->padding > 0 && flag->precision != 0)
 		flag->width = flag->padding;
 	if (flag->width != 0)
-		str = width_handler(str, flag->width);
-	count_and_display(fmt, str, 'p', ptf_ret);
+		str = width_conversion(str, flag->width);
+	count_and_print(fmt, str, 'p', ptf_ret);
 	free(str);
 	free(flag);
 }

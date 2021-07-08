@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   width_handler.c                                    :+:      :+:    :+:   */
+/*   field_width_conversion.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:41:54 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 00:21:43 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:06:22 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*pos_wid_handler(char *str, int width, int len)
 	return (new);
 }
 
-char	*width_handler(char *str, int width)
+char	*width_conversion(char *str, int width)
 {
 	int	len;
 

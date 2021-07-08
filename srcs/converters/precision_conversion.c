@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   precision_handler.c                                :+:      :+:    :+:   */
+/*   precision_conversion.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:42:57 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:49:53 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:06:48 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*neg_prec_handler(char *str, int precision, int len)
 	return (new);
 }
 
-char	*precision_handler(char *str, int precision)
+char	*precision_conversion(char *str, int precision)
 {
 	int	len;
 

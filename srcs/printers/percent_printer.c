@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_specifier.c                                      :+:      :+:    :+:   */
+/*   percent_printer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:36:44 by sdummett         ###   ########.fr       */
+/*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
+/*   Updated: 2021/07/08 22:41:45 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	u_printer(char **fmt, va_list var, int *ptf_ret)
+void	percent_printer(char **fmt, va_list var, int *ptf_ret)
 {
+	int			len;
 	char		*str;
 	t_attribs	*flag;
 
+	len = 0;
 	flag = fmt_parser(fmt, var);
-	if (flag->prec_is_dot == 0 && flag->padding < 0)
-		flag->width = flag->padding;
-	str = ft_uitoa(va_arg(var, int));
-	str = check_if_eq_zero(str, flag->prec_is_dot);
-	if (flag->precision > 0)
-		str = precision_handler(str, flag->precision);
+	str = ft_strdup("%");
+	if (flag->precision > 0 || flag->prec_is_dot == 1)
+		str = precision_conversion(str, flag->precision);
+	if (flag->padding > 0)
+		str = padding_conversion(str, flag->padding, flag->precision, \
+				flag->prec_is_dot);
 	if (flag->width != 0)
-		str = width_handler(str, flag->width);
-	if (flag->padding > 0 || flag->prec_is_dot == 1)
-		str = padding_handler(str, flag->padding, \
-				flag->precision, flag->prec_is_dot);
-	count_and_display(fmt, str, 'u', ptf_ret);
-	free(flag);
+		str = width_conversion(str, flag->width);
+	count_and_print(fmt, str, '%', ptf_ret);
 	free(str);
+	free(flag);
 }

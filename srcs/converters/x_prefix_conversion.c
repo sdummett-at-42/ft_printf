@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prefix_handler.c                                   :+:      :+:    :+:   */
+/*   sharp_flag_conversion.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 14:08:43 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 14:14:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:07:33 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-char	*prefix_handler(char *str, char spec)
+char	*x_prefix_conversion(char *str, char spec)
 {
 	int		i;
 	int		len;

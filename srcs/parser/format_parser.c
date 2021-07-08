@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:35:23 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:30:15 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 	if ((*fmt)[i] == ' ')
 		blank_parsing(flag, fmt, &i);
 	if ((*fmt)[i] == '+')
-		pos_prefix_parsing(flag, fmt, &i);
+		plus_parsing(flag, fmt, &i);
 	if ((*fmt)[i] == '#')
-		prefix_parsing(flag, fmt, &i);
+		sharp_parsing(flag, fmt, &i);
 	if ((*fmt)[i] == '0')
-		padding_parsing(flag, fmt, var, &i);
+		zero_parsing(flag, fmt, var, &i);
 	if ((*fmt)[i] == '+')
-		pos_prefix_parsing(flag, fmt, &i);
+		plus_parsing(flag, fmt, &i);
 	if (((*fmt)[i] >= '1' && (*fmt)[i] <= '9') || \
 			(*fmt)[i] == '-' || (*fmt)[i] == '*')
 		width_parsing(flag, fmt, var, &i);
 	if ((*fmt)[i] == '.')
-		prec_parsing(flag, fmt, var, &i);
+		dot_parsing(flag, fmt, var, &i);
 	return (flag);
 }

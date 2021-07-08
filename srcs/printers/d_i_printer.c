@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_i_specifier.c                                    :+:      :+:    :+:   */
+/*   d_i_printer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:35:09 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:38:28 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static char	*pos_prefix_handler(char *str)
+static char	*plus_prefix_conversion(char *str)
 {
 	int		i;
 	int		len;
@@ -38,7 +38,7 @@ static char	*pos_prefix_handler(char *str)
 	return (new);
 }
 
-static char	*blank_handler(char *str)
+static char	*blank_conversion(char *str)
 {
 	int		i;
 	int		len;
@@ -75,17 +75,17 @@ void	d_i_printer(char **fmt, va_list var, int *ptf_ret)
 	str = ft_itoa(va_arg(var, int));
 	str = check_if_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
-		str = precision_handler(str, flag->precision);
+		str = precision_conversion(str, flag->precision);
 	if (flag->blank == 1)
-		str = blank_handler(str);
+		str = blank_conversion(str);
 	if (flag->pos_prefix == 1)
-		str = pos_prefix_handler(str);
+		str = plus_prefix_conversion(str);
 	if (flag->width != 0)
-		str = width_handler(str, flag->width);
+		str = width_conversion(str, flag->width);
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
-		str = padding_handler(str, flag->padding, \
+		str = padding_conversion(str, flag->padding, \
 				flag->precision, flag->prec_is_dot);
-	count_and_display(fmt, str, 'd', ptf_ret);
+	count_and_print(fmt, str, 'd', ptf_ret);
 	free(flag);
 	free(str);
 }

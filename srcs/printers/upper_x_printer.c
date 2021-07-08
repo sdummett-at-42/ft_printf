@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   upper_x_specifier.c                                :+:      :+:    :+:   */
+/*   upper_x_printer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:24:06 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:36:34 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:41:15 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void	upper_x_printer(char **fmt, va_list var, int *ptf_ret)
 	str = uitohex_up(va_arg(var, unsigned int));
 	str = check_if_eq_zero(str, flag->prec_is_dot);
 	if (flag->precision > 0)
-		str = precision_handler(str, flag->precision);
+		str = precision_conversion(str, flag->precision);
 	if (flag->prefix == 1)
-		str = prefix_handler(str, 'X');
+		str = x_prefix_conversion(str, 'X');
 	if (flag->width != 0)
-		str = width_handler(str, flag->width);
+		str = width_conversion(str, flag->width);
 	if (flag->padding > 0 || flag->prec_is_dot == 1)
-		str = padding_handler(str, flag->padding, \
+		str = padding_conversion(str, flag->padding, \
 	flag->precision, flag->prec_is_dot);
-	count_and_display(fmt, str, 'X', ptf_ret);
+	count_and_print(fmt, str, 'X', ptf_ret);
 	free(flag);
 	free(str);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_and_display.c                                :+:      :+:    :+:   */
+/*   count_and_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 13:26:22 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 00:20:13 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:00:52 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	count_and_display(char **format, char *str, char c, int *ptf_ret)
+void	count_and_print(char **format, char *str, char c, int *ptf_ret)
 {
 	int	len;
 

@@ -6,7 +6,7 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/08 18:48:17 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/08 22:44:44 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,37 +16,33 @@ ARFLAGS = rcs
 CFLAGS	= -Wall -Werror -Wextra -c
 NAME	= libftprintf.a
 
-SRC		= srcs/c_specifier.c \
-		  srcs/s_specifier.c \
-		  srcs/p_specifier.c \
-		  srcs/d_i_specifier.c \
-		  srcs/u_specifier.c \
-		  srcs/lower_x_specifier.c \
-		  srcs/upper_x_specifier.c \
-		  srcs/percent_specifier.c \
-		  srcs/format_parser.c \
-		  srcs/find_call_printer.c \
-		  srcs/uitoa.c \
-		  srcs/struct_init.c \
-		  srcs/count_and_display.c \
-		  srcs/uitohex_low.c \
-		  srcs/uitohex_up.c \
-		  srcs/check_if_eq_zero.c \
-		  srcs/precision_handler.c \
-		  srcs/width_handler.c \
-		  srcs/padding_handler.c \
-		  srcs/prefix_handler.c \
-		  srcs/parsing_funcs.c \
-		  srcs/sharp_padding.c \
-		  ft_printf.c
+SRC		= srcs/ft_printf.c \
+		  srcs/parser/format_parser.c \
+		  srcs/parser/parsing_funcs.c \
+		  srcs/parser/struct_init.c \
+		  srcs/printers/c_printer.c \
+		  srcs/printers/s_printer.c \
+		  srcs/printers/p_printer.c \
+		  srcs/printers/d_i_printer.c \
+		  srcs/printers/u_printer.c \
+		  srcs/printers/lower_x_printer.c \
+		  srcs/printers/upper_x_printer.c \
+		  srcs/printers/percent_printer.c \
+		  srcs/printers/check_if_eq_zero.c \
+		  srcs/printers/count_and_print.c \
+		  srcs/printers/find_call_printer.c \
+		  srcs/converters/field_width_conversion.c \
+		  srcs/converters/padding_conversion.c \
+		  srcs/converters/precision_conversion.c \
+		  srcs/converters/x_prefix_conversion.c \
+		  srcs/converters/x_prefix_pad_conversion.c \
+		  srcs/utils/uitohex_low.c \
+		  srcs/utils/uitohex_up.c \
+		  srcs/utils/uitoa.c
 
 OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
-
-#
-#---->Add colors
-#
 
 $(NAME): $(OBJ)
 	make -C libft

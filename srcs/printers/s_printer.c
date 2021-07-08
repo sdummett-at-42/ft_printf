@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_specifier.c                                      :+:      :+:    :+:   */
+/*   s_printer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 18:36:15 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:34:53 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	s_printer(char **fmt, va_list var, int *ptf_ret)
 	if (flag->padding > 0 && flag->precision > 0)
 		flag->width = flag->padding;
 	if (flag->width != 0)
-		str = width_handler(str, flag->width);
-	count_and_display(fmt, str, 's', ptf_ret);
+		str = width_conversion(str, flag->width);
+	count_and_print(fmt, str, 's', ptf_ret);
 	free(str);
 	free(flag);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   padding_handler.c                                  :+:      :+:    :+:   */
+/*   padding_conversion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:44:37 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 17:51:40 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/08 22:29:26 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ static char	*neg_pos_pad_handler(char *str, int padding, int len)
 	return (new);
 }
 
-char	*padding_handler(char *str, int padding, int precision, int dot)
+char	*padding_conversion(char *str, int padding, int precision, int dot)
 {
 	int	len;
 
 	len = ft_strlen(str);
 	if (precision > 0 || dot == 1)
-		return (width_handler(str, padding));
+		return (width_conversion(str, padding));
 	else if (str[0] == '-' || str[0] == '+' || str[0] == ' ')
-		return (neg_pos_pad_handler(str, padding, len));
+		return (neg_pos_pad_handler(str, padding, len)); //func special flag 
 	else if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
-		return (sharp_hexa_pad(str, padding, len));
+		return (x_prefix_pad_conversion(str, padding, len));
 	else
 		return (pos_pad_handler(str, padding, len));
 }
