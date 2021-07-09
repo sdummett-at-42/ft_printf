@@ -6,13 +6,18 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:42:57 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:06:48 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:23:27 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static char	*pos_prec_handler(char *str, int precision, int len)
+/*
+ *	precision_conversion() will add '0' if precision is greater than
+ *	the actual length of the string.
+*/
+
+static char	*positive_precision(char *str, int precision, int len)
 {
 	int		i;
 	char	*new;
@@ -41,14 +46,14 @@ static char	*pos_prec_handler(char *str, int precision, int len)
 	return (new);
 }
 
-static char	*neg_prec_handler(char *str, int precision, int len)
+static char	*negative_precision(char *str, int precision, int len)
 {
 	int		i;
 	char	*new;
 
 	if (!(precision + 1 >= len))
 		return (str);
-	new = malloc(sizeof(char) * precision + 2);
+	new = (char *)malloc(sizeof(char) * precision + 2);
 	new[0] = '-';
 	precision = precision - (len - 1);
 	i = 1;
@@ -76,7 +81,7 @@ char	*precision_conversion(char *str, int precision)
 
 	len = ft_strlen(str);
 	if (str[0] == '-')
-		return (neg_prec_handler(str, precision, len));
+		return (negative_precision(str, precision, len));
 	else
-		return (pos_prec_handler(str, precision, len));
+		return (positive_precision(str, precision, len));
 }

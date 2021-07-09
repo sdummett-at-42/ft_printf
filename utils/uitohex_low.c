@@ -6,11 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:18:56 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:23:12 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:20:35 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	uitohex_low() : Just unsigned int to hexadecimal lower case conversion.
+*/
 
 static int	len_str(unsigned long nb)
 {
@@ -36,6 +40,8 @@ char	*uitohex_low(unsigned long nb)
 	hexbase_low = "0123456789abcdef";
 	len = len_str(nb);
 	str = (char *)malloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
 	if (nb == 0)
 		str[0] = '0';
 	str[len] = 0;

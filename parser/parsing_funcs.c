@@ -6,11 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:43:12 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:55:39 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	dot_parsing() stock the value of the precision in flag->precision.
+*/
 
 void	dot_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
@@ -23,11 +27,15 @@ void	dot_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 	else if ((*fmt)[j] >= '0' && (*fmt)[j] <= '9')
 		flag->precision = ft_atoi(&(*fmt)[j]);
 	if (flag->precision == 0)
-		flag->prec_is_dot = 1;
+		flag->prec_is_zero = 1;
 	while ((*fmt)[j] >= '0' && (*fmt)[j] <= '9')
 		j++;
 	*i = j;
 }
+
+/*
+ *	zero_parsing() stock the value of the padding in flag->padding.
+*/
 
 void	zero_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
@@ -47,17 +55,25 @@ void	zero_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
+/*
+ *	plus_parsing() set the value for the '+' flag at 1 in flag->plus_prefix.
+*/
+
 void	plus_parsing(t_attribs *flag, char **fmt, int *i)
 {
 	int	j;
 
 	j = *i;
-	flag->pos_prefix = 1;
+	flag->plus_prefix = 1;
 	flag->blank = 0;
 	while ((*fmt)[j] == '+' || (*fmt)[j] == ' ')
 		j++;
 	*i = j;
 }
+
+/*
+ *	sharp_parsing() set the value for the '#' flag at 1 in flag->prefix.
+*/
 
 void	sharp_parsing(t_attribs *flag, char **fmt, int *i)
 {
@@ -69,6 +85,10 @@ void	sharp_parsing(t_attribs *flag, char **fmt, int *i)
 		j++;
 	*i = j;
 }
+
+/*
+ *	blank_parsing() set the value for the ' ' flag at 1 in flag->blank.
+*/
 
 void	blank_parsing(t_attribs *flag, char **fmt, int *i)
 {

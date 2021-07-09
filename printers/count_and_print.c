@@ -6,11 +6,17 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 13:26:22 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:00:52 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:40:35 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	count_and_print() skips all the flags and specifier character, adds
+ *	the len that will be printed for the return of ft_printf and then
+ *	print the string.
+*/
 
 void	count_and_print(char **format, char *str, char c, int *ptf_ret)
 {

@@ -6,11 +6,15 @@
 /*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 01:02:59 by stone             #+#    #+#             */
-/*   Updated: 2021/07/08 22:16:26 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:53:41 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	uitoa() : Just unsigned int to ascii conversion.
+*/
 
 static int	sizeof_n(unsigned int n)
 {

@@ -6,11 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:19:42 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/07 00:21:21 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:21:04 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	uitohexup() : Just unsigned int to hexadecimal upper case conversion.
+*/
 
 static int	len_str(unsigned long nb)
 {
@@ -36,6 +40,8 @@ char	*uitohex_up(unsigned long nb)
 	hexbase_up = "0123456789ABCDEF";
 	len = len_str(nb);
 	str = (char *)malloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
 	if (nb == 0)
 		str[0] = '0';
 	str[len] = 0;

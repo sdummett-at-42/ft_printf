@@ -6,11 +6,16 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:27:13 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/06 14:33:21 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:27:32 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	check_if_eq_zero() checks if the string is "0" and returns an empty
+ *	string if the precision is 0 too.
+*/
 
 char	*check_if_eq_zero(char *str, int dot)
 {

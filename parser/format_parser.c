@@ -6,11 +6,15 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:50:39 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:30:15 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:04:18 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	width_parsing() stock the value of the field width in flag->width.
+*/
 
 static void	width_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 {
@@ -41,6 +45,11 @@ static void	width_parsing(t_attribs *flag, char **fmt, va_list var, int *i)
 	*i = j;
 }
 
+/*
+ *	fmt_parser() will parse the format string and call the right in order
+ *	to save the value.
+*/
+
 t_attribs	*fmt_parser(char **fmt, va_list var)
 {
 	int			i;
@@ -48,7 +57,6 @@ t_attribs	*fmt_parser(char **fmt, va_list var)
 
 	flag = struct_init();
 	i = 0;
-	flag->negative = 1;
 	if ((*fmt)[i] == ' ')
 		blank_parsing(flag, fmt, &i);
 	if ((*fmt)[i] == '+')

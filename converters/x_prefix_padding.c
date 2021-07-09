@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sharp_padding.c                                    :+:      :+:    :+:   */
+/*   x_prefix_padding.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 17:49:25 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:08:35 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:26:58 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	x_prefic_pad_conversion will add '0' padding, when '#' and '0' flags
+ *	are given for the 'x' or 'X' conversions.
+ */
 
 static void	copy_str(char *new, char *str, int i, int j)
 {
@@ -23,7 +28,7 @@ static void	copy_str(char *new, char *str, int i, int j)
 	new[i] = '\0';
 }
 
-static int	sharp_insert_zero(char *new, int padding)
+static int	insert_zero(char *new, int padding)
 {
 	int	i;
 
@@ -37,7 +42,7 @@ static int	sharp_insert_zero(char *new, int padding)
 	return (i);
 }
 
-char	*x_prefix_pad_conversion(char *str, int padding, int len)
+char	*x_prefix_padding(char *str, int padding, int len)
 {
 	int		i;
 	char	*new;
@@ -54,7 +59,7 @@ char	*x_prefix_pad_conversion(char *str, int padding, int len)
 		i++;
 	}
 	padding = padding - len;
-	i = sharp_insert_zero(new, padding);
+	i = insert_zero(new, padding);
 	copy_str(new, str, i, 2);
 	free(str);
 	return (new);

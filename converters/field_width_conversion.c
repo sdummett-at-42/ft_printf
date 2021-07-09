@@ -6,13 +6,18 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 14:41:54 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:06:22 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 13:50:39 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static char	*neg_wid_handler(char *str, int width, int len)
+/*
+ *	width_conversion() just add space before or after the string, depending
+ *	on respectively if width is postive or negative.
+*/
+
+static char	*negative_width(char *str, int width, int len)
 {
 	int		i;
 	char	*new;
@@ -38,7 +43,7 @@ static char	*neg_wid_handler(char *str, int width, int len)
 	return (new);
 }
 
-static char	*pos_wid_handler(char *str, int width, int len)
+static char	*positive_width(char *str, int width, int len)
 {
 	int		i;
 	char	*new;
@@ -72,6 +77,6 @@ char	*width_conversion(char *str, int width)
 
 	len = ft_strlen(str);
 	if (width < 0)
-		return (neg_wid_handler(str, width * -1, len));
-	return (pos_wid_handler(str, width, len));
+		return (negative_width(str, width * -1, len));
+	return (positive_width(str, width, len));
 }

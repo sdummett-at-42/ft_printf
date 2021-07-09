@@ -6,14 +6,14 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:59:48 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:00:52 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include <stdarg.h>
 
 /*
@@ -23,11 +23,11 @@
 typedef struct s_attribs
 {
 	int	precision;
-	int	prec_is_dot;
+	int	prec_is_zero;
 	int	width;
 	int	padding;
 	int	prefix;
-	int	pos_prefix;
+	int	plus_prefix;
 	int	blank;
 	int	negative;
 }		t_attribs;
@@ -67,7 +67,7 @@ char		*precision_conversion(char *str, int precision);
 char		*width_conversion(char *str, int width);
 char		*padding_conversion(char *str, int padding, int precision, int dot);
 char		*x_prefix_conversion(char *str, char spec);
-char		*x_prefix_pad_conversion(char *str, int padding, int len);
+char		*x_prefix_padding(char *str, int padding, int len);
 char		*check_if_eq_zero(char *str, int dot);
 
 /*

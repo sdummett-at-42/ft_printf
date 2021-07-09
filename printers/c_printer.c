@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:34:31 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 14:56:00 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ static char	*char_width_handler(char *str, int width)
 	return (str);
 }
 
-static int	c_count_print(char **fmt, t_attribs *flag, char *str, char c)
+/*
+ *	c_skip_print() prints the char in accordance with the width given or
+ *	not.
+*/
+
+static int	c_skip_print(char **fmt, t_attribs *flag, char *str, char c)
 {
 	int		len;
 
@@ -53,6 +58,11 @@ static int	c_count_print(char **fmt, t_attribs *flag, char *str, char c)
 	(*fmt)++;
 	return (len);
 }
+
+/*
+ *	c_printer() checks the all the flags raised and call the right
+ *	functions in order to do right conversions, then print it.
+*/
 
 void	c_printer(char **fmt, va_list var, int *ptf_ret)
 {
@@ -69,12 +79,12 @@ void	c_printer(char **fmt, va_list var, int *ptf_ret)
 		return ;
 	if (flag->precision > 0)
 		str = padding_conversion(str, flag->padding, flag->precision, \
-				flag->prec_is_dot);
+				flag->prec_is_zero);
 	else if (flag->padding > 0 && flag->precision != 0)
 		flag->width = flag->padding;
 	if (flag->width != 0)
 		str = char_width_handler(str, flag->width);
-	len = c_count_print(fmt, flag, str, c);
+	len = c_skip_print(fmt, flag, str, c);
 	*ptf_ret = *ptf_ret + len + 1;
 	free(str);
 	free(flag);

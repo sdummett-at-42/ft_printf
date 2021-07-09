@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sharp_flag_conversion.c                            :+:      :+:    :+:   */
+/*   x_prefix_conversion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 14:08:43 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/08 22:07:33 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 15:22:07 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+/*
+ *	x_prefix_conversion() will add "0x" or "0X", respectively for 'x' or 'X'
+ *	specifiers when '#' flag is given.
+*/
 
 char	*x_prefix_conversion(char *str, char spec)
 {

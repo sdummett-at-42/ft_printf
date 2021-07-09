@@ -6,41 +6,51 @@
 #    By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/26 06:11:54 by sdummett          #+#    #+#              #
-#    Updated: 2021/07/08 22:44:44 by sdummett         ###   ########.fr        #
+#    Updated: 2021/07/09 14:07:32 by sdummett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# ************************************ #
+#                                      #
+#              VARIABLES               #
+#                                      #
+# ************************************ #
 
 CC		= clang
 AR		= ar
 ARFLAGS = rcs
 CFLAGS	= -Wall -Werror -Wextra -c
 NAME	= libftprintf.a
-
-SRC		= srcs/ft_printf.c \
-		  srcs/parser/format_parser.c \
-		  srcs/parser/parsing_funcs.c \
-		  srcs/parser/struct_init.c \
-		  srcs/printers/c_printer.c \
-		  srcs/printers/s_printer.c \
-		  srcs/printers/p_printer.c \
-		  srcs/printers/d_i_printer.c \
-		  srcs/printers/u_printer.c \
-		  srcs/printers/lower_x_printer.c \
-		  srcs/printers/upper_x_printer.c \
-		  srcs/printers/percent_printer.c \
-		  srcs/printers/check_if_eq_zero.c \
-		  srcs/printers/count_and_print.c \
-		  srcs/printers/find_call_printer.c \
-		  srcs/converters/field_width_conversion.c \
-		  srcs/converters/padding_conversion.c \
-		  srcs/converters/precision_conversion.c \
-		  srcs/converters/x_prefix_conversion.c \
-		  srcs/converters/x_prefix_pad_conversion.c \
-		  srcs/utils/uitohex_low.c \
-		  srcs/utils/uitohex_up.c \
-		  srcs/utils/uitoa.c
-
+SRC		= ft_printf.c \
+		  parser/format_parser.c \
+		  parser/parsing_funcs.c \
+		  parser/struct_init.c \
+		  printers/c_printer.c \
+		  printers/s_printer.c \
+		  printers/p_printer.c \
+		  printers/d_i_printer.c \
+		  printers/u_printer.c \
+		  printers/lower_x_printer.c \
+		  printers/upper_x_printer.c \
+		  printers/percent_printer.c \
+		  printers/check_if_eq_zero.c \
+		  printers/count_and_print.c \
+		  printers/find_call_printer.c \
+		  converters/field_width_conversion.c \
+		  converters/padding_conversion.c \
+		  converters/precision_conversion.c \
+		  converters/x_prefix_conversion.c \
+		  converters/x_prefix_padding.c \
+		  utils/uitohex_low.c \
+		  utils/uitohex_up.c \
+		  utils/uitoa.c
 OBJ		= $(SRC:.c=.o)
+
+# ************************************ #
+#                                      #
+#                RULES                 #
+#                                      #
+# ************************************ #
 
 all: $(NAME)
 
