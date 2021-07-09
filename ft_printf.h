@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 17:21:59 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/09 15:00:52 by sdummett         ###   ########.fr       */
+/*   Updated: 2021/07/09 23:22:26 by stone            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 
 /*
- * -> Checker les printfs (grep) et return (-1) en cas de malloc failed.
+ *	Structure for the result of the format parsing on a specifier. 
 */
 
 typedef struct s_attribs
@@ -62,7 +62,6 @@ void		call_printer(int handler_choice, char **fmt, va_list var, \
  *	Functions that will transform a string.
 */
 
-//void		integer_handler(char **fmt, va_list var, int *ptf_ret);
 char		*precision_conversion(char *str, int precision);
 char		*width_conversion(char *str, int width);
 char		*padding_conversion(char *str, int padding, int precision, int dot);
