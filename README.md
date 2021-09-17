@@ -1,23 +1,30 @@
 # Welcome to ft_printf 👋
 
-> This project is pretty straight forward. I recoded printf.
+This project is pretty straight forward. I recoded printf.
 
-## Install
+## Installation
 
+Clone the repository:
 ```sh
-make libftprintf.a
+git clone git@github.com:sdummett/ft_printf.git
+```
+Make to create the libftprintf.a:
+```sh
+make
 ```
 
 ## Usage
 
+### libftprintf.a
+
+You can use the library while you are compiling your source files:
+Example
 ```sh
-Add the libftprintf.a with your source files while compiling.
+gcc main.c libftprintf.a
 ```
-
-## Run tests
-
+Or
 ```sh
-Ex: clang main.c libftprintf.a
+gcc main.o libftprintf.a
 ```
 
 ## Author
@@ -25,11 +32,3 @@ Ex: clang main.c libftprintf.a
 👤 **Stone**
 
 * Github: [@sdummett](https://github.com/sdummett)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
