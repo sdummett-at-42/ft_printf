@@ -1,4 +1,4 @@
-# Welcome to ft_printf 👋
+# Welcome to ft_printf
 
 This project is pretty straight forward. I recoded printf.
 
