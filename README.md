@@ -4,21 +4,17 @@ This project is pretty straight forward. I recoded printf.
 
 ## Installation
 
-Clone the repository:
 ```sh
-git clone git@github.com:sdummett/ft_printf.git
+git clone git@github.com:sdummett/ft_printf.git && cd ft_printf && make
 ```
-Make to create the libftprintf.a:
-```sh
-make
-```
+Then libftprintf.a library is created.
 
 ## Usage
 
 ### libftprintf.a
 
 You can use the library while you are compiling your source files:
-Example
+Example:
 ```sh
 gcc main.c libftprintf.a
 ```
