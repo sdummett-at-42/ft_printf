@@ -13,7 +13,7 @@ Then libftprintf.a library is created.
 
 ### libftprintf.a
 
-You can use the library while you are compiling your source files:
+You can use the library while you are compiling your source files.
 Example:
 ```sh
 gcc main.c libftprintf.a
