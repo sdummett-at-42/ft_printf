@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:19:32 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/09 15:31:18 by sdummett         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:52:48 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	s_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	t_attribs	*flag;
 	char		*str;
-	int			len;
 
-	len = 0;
 	flag = fmt_parser(fmt, var);
 	str = create_str(va_arg(var, char *));
 	if (flag->precision > 0 || flag->prec_is_zero == 1)

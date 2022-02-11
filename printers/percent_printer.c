@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 12:09:31 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/09 14:57:50 by sdummett         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:53:14 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@
 
 void	percent_printer(char **fmt, va_list var, int *ptf_ret)
 {
-	int			len;
 	char		*str;
 	t_attribs	*flag;
 
-	len = 0;
 	flag = fmt_parser(fmt, var);
 	str = ft_strdup("%");
 	if (flag->precision > 0 || flag->prec_is_zero == 1)

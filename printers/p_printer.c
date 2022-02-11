@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_printer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stone <sdummett@student.42.fr>             +#+  +:+       +#+        */
+/*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 06:58:14 by stone             #+#    #+#             */
-/*   Updated: 2021/07/09 15:31:47 by sdummett         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:53:01 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ void	p_printer(char **fmt, va_list var, int *ptf_ret)
 {
 	t_attribs	*flag;
 	char		*str;
-	int			len;
 
-	len = 0;
 	flag = fmt_parser(fmt, var);
 	str = create_address(va_arg(var, unsigned long));
 	if (flag->precision > 0)

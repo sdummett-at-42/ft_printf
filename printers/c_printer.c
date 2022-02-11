@@ -6,7 +6,7 @@
 /*   By: sdummett <sdummett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 02:13:48 by sdummett          #+#    #+#             */
-/*   Updated: 2021/07/09 14:56:00 by sdummett         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:52:28 by sdummett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static char	*char_width_handler(char *str, int width)
 {
-	int		i;
 	int		len;
 
 	len = ft_strlen(str);
-	i = 0;
 	if (width > 0)
 		width = width - 1;
 	else
